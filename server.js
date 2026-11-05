@@ -36,6 +36,9 @@ const rateLimit = require("express-rate-limit");
 const { Server } = require("socket.io");
 
 const app = express();
+// Behind Wispbyte's reverse proxy, req.ip must come from X-Forwarded-For. Without this every
+// player shares one rate-limit bucket. Set TRUST_PROXY_HOPS=2 if another proxy (e.g. Cloudflare) is in front.
+app.set("trust proxy", Number(process.env.TRUST_PROXY_HOPS) || 1);
 const server = http.createServer(app);
 const PORT = Number(process.env.PORT) || 11914;
 const defaultOrigins = [
@@ -49,11 +52,33 @@ const players = new Map();
 const tokenToPlayer = new Map();
 const DATA_FILE = process.env.ECLIPSE_DATA_FILE || path.join(__dirname, "eclipse-data.json");
 function hashToken(token) { return crypto.createHash("sha256").update(String(token)).digest("hex"); }
-function saveData() {
+function snapshotJson() {
   const data = [...players.values()].map(p => ({ id: p.id, tokenHash: p.tokenHash, profile: p.profile, friends: [...p.friends] }));
-  const temp = DATA_FILE + ".tmp";
-  fs.writeFileSync(temp, JSON.stringify({ version: 1, players: data }), { mode: 0o600 });
-  fs.renameSync(temp, DATA_FILE);
+  return JSON.stringify({ version: 1, players: data });
+}
+// Saves are debounced and asynchronous so a burst of profile updates cannot block the event loop.
+let saveTimer = null, saving = false, saveAgain = false;
+function saveData() {
+  if (saveTimer) return;
+  saveTimer = setTimeout(() => { saveTimer = null; writeDataAsync(); }, 750);
+}
+async function writeDataAsync() {
+  if (saving) { saveAgain = true; return; }
+  saving = true;
+  try {
+    const temp = DATA_FILE + ".tmp";
+    await fs.promises.writeFile(temp, snapshotJson(), { mode: 0o600 });
+    await fs.promises.rename(temp, DATA_FILE);
+  } catch (e) { console.error("Could not save player data:", e.message); }
+  finally { saving = false; if (saveAgain) { saveAgain = false; saveData(); } }
+}
+function flushDataSync() {
+  if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
+  try {
+    const temp = DATA_FILE + ".sync.tmp";
+    fs.writeFileSync(temp, snapshotJson(), { mode: 0o600 });
+    fs.renameSync(temp, DATA_FILE);
+  } catch (e) { console.error("Could not flush player data:", e.message); }
 }
 function loadData() {
   try {
@@ -70,14 +95,10 @@ const invites = new Map();
 const socketsByPlayer = new Map();
 const activeMatches = new Map();
 const MAX_PLAYERS = Math.max(100, Math.min(50000, Number(process.env.MAX_PLAYERS) || 5000));
-// Access is granted only to server-listed player IDs. Never put this list in frontend code.
-const youtubeAllowedPlayers = new Set((process.env.YOUTUBE_ALLOWED_PLAYER_IDS || "")
-  .split(",").map(value => value.trim().toUpperCase())
-  .filter(value => /^EA-[A-Z0-9]{3,8}-[A-Z0-9]{3,8}$/.test(value)));
 // Accept one or several owner IDs. Commas, semicolons, and newlines are supported
 // so Wispbyte environment-variable formatting cannot silently break the owner list.
 const youtubeAdminPlayerIdConfig =
-  process.env.YOUTUBE_ADMIN_PLAYER_IDS || process.env.YOUTUBE_ADMIN_PLAYER_ID || "EA-4CD88B-8126BD";
+  process.env.YOUTUBE_ADMIN_PLAYER_IDS || process.env.YOUTUBE_ADMIN_PLAYER_ID || "";
 const youtubeAdminPlayers = new Set(youtubeAdminPlayerIdConfig
   .split(/[,;\n\r]+/).map(value => value.trim().toUpperCase())
   .filter(value => /^EA-[A-Z0-9]{3,8}-[A-Z0-9]{3,8}$/.test(value)));
@@ -111,6 +132,23 @@ const profileLimiter = rateLimit({
   windowMs: 60 * 1000, limit: 30, standardHeaders: "draft-7", legacyHeaders: false,
   message: { error: "Too many profile updates. Please wait a moment." }
 });
+const commentsLimiter = rateLimit({
+  windowMs: 60 * 1000, limit: 30, standardHeaders: "draft-7", legacyHeaders: false,
+  message: { error: "Too many comment requests. Please wait a moment." }
+});
+// Small in-memory cache so repeat views of the same video do not spend YouTube API quota.
+const commentsCache = new Map();
+const COMMENTS_TTL_MS = 5 * 60 * 1000, COMMENTS_CACHE_MAX = 300;
+function commentsCacheGet(key) {
+  const hit = commentsCache.get(key);
+  if (!hit) return null;
+  if (Date.now() - hit.at > COMMENTS_TTL_MS) { commentsCache.delete(key); return null; }
+  return hit.body;
+}
+function commentsCacheSet(key, body) {
+  if (commentsCache.size >= COMMENTS_CACHE_MAX) commentsCache.delete(commentsCache.keys().next().value);
+  commentsCache.set(key, { at: Date.now(), body });
+}
 function pruneExpiredInvites() {
   const cutoff = Date.now() - 5 * 60 * 1000;
   for (const [id, invite] of invites) if (invite.createdAt < cutoff) invites.delete(id);
@@ -131,7 +169,7 @@ app.use(express.json({ limit: "12kb", strict: true }));
 app.use(rateLimit({ windowMs: 60 * 1000, limit: 90, standardHeaders: "draft-7", legacyHeaders: false }));
 app.get("/health", (_req, res) => res.json({ ok: true, service: "Eclipse Arena API" }));
 // Public, read-only comments endpoint. Keep YOUTUBE_API_KEY on the server, never in frontend files.
-app.get("/api/youtube/comments", async (req, res) => {
+app.get("/api/youtube/comments", commentsLimiter, async (req, res) => {
   const videoId = String(req.query.videoId || "");
   const pageToken = String(req.query.pageToken || "");
   if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) {
@@ -142,6 +180,9 @@ app.get("/api/youtube/comments", async (req, res) => {
   }
   const apiKey = process.env.YOUTUBE_API_KEY;
   if (!apiKey) return res.status(503).json({ error: "YouTube comments are not configured yet. The owner must add YOUTUBE_API_KEY to the backend environment." });
+  const cacheKey = videoId + "|" + pageToken;
+  const cached = commentsCacheGet(cacheKey);
+  if (cached) return res.json(cached);
   try {
     const params = new URLSearchParams({
       part: "snippet",
@@ -160,7 +201,9 @@ app.get("/api/youtube/comments", async (req, res) => {
     if (!upstream.ok) {
       const reason = payload?.error?.errors?.[0]?.reason || "";
       if (reason === "commentsDisabled" || reason === "disabledComments") {
-        return res.json({ comments: [], nextPageToken: "", message: "Comments are disabled for this video." });
+        const body = { comments: [], nextPageToken: "", message: "Comments are disabled for this video." };
+        commentsCacheSet(cacheKey, body);
+        return res.json(body);
       }
       console.error("[YouTube comments API]", upstream.status, reason || "request failed");
       return res.status(upstream.status === 404 ? 404 : 502).json({
@@ -178,7 +221,9 @@ app.get("/api/youtube/comments", async (req, res) => {
         publishedAt: String(snippet.publishedAt || "")
       };
     });
-    return res.json({ comments, nextPageToken: payload.nextPageToken || "" });
+    const body = { comments, nextPageToken: payload.nextPageToken || "" };
+    commentsCacheSet(cacheKey, body);
+    return res.json(body);
   } catch (error) {
     console.error("[YouTube comments request]", error.name || "Error");
     return res.status(504).json({ error: "YouTube comments request timed out. Please try again." });
@@ -189,30 +234,11 @@ app.get("/api/youtube/access", auth, (req, res) => {
   const playerId = req.player.id;
   const latest = [...youtubeAccessData.requests].reverse().find(r => r.playerId === playerId);
   const isAdmin = youtubeAdminPlayers.has(playerId);
-  // Temporary troubleshooting log: reports only the current player ID, admin count, and match result.
-  console.log("[YouTube admin check]", {
-    currentPlayerId: playerId,
-    configuredAdminCount: youtubeAdminPlayers.size,
-    isAdmin
-  });
-  // Owners always have access; other players need a one-entry owner approval.
+  // Approval is one-entry: it is revoked when the player leaves the area (POST /api/youtube/leave),
+  // not by merely checking it. The client also calls this endpoint at connect time to detect admins,
+  // which would otherwise use up a non-admin player's approval before they ever opened the area.
   const allowed = isAdmin || youtubeIsApproved(playerId);
-  // Consume one-entry approvals only for non-owner players.
-  if (!isAdmin && allowed && youtubeAccessData.approved.includes(playerId)) {
-    youtubeAccessData.approved = youtubeAccessData.approved.filter(id => id !== playerId);
-    saveYoutubeAccess();
-  }
-  return res.json({
-    allowed,
-    isAdmin,
-    requestStatus: latest?.status || "none",
-    diagnostics: {
-      currentPlayerId: playerId,
-      adminIdConfigured: youtubeAdminPlayers.size > 0,
-      configuredAdminCount: youtubeAdminPlayers.size,
-      currentPlayerIsAdmin: isAdmin
-    }
-  });
+  res.json({ allowed, isAdmin, requestStatus: latest?.status || "none" });
 });
 app.post("/api/youtube/leave", auth, (req, res) => {
   const playerId = req.player.id;
@@ -350,6 +376,13 @@ app.post("/api/invites", auth, inviteLimiter, (req, res) => {
   if (!req.player.friends.has(id)) return res.status(403).json({ error: "Add this player as a friend first" });
   const target = players.get(id);
   if (!target) return res.status(404).json({ error: "Friend is offline or not found" });
+  // One pending invite per sender->target pair, and at most 5 invites waiting on any one player.
+  let pendingForTarget = 0;
+  for (const [rid, inv] of invites) {
+    if (inv.to !== id) continue;
+    if (inv.from === req.player.id) invites.delete(rid); else pendingForTarget++;
+  }
+  if (pendingForTarget >= 5) return res.status(429).json({ error: "That player has too many pending invites. Try again later." });
   const roomId = crypto.randomBytes(8).toString("hex");
   invites.set(roomId, { from: req.player.id, to: id, createdAt: Date.now() });
   socketsByPlayer.get(id)?.forEach(s => s.emit("friend:invite", { roomId, fromName: req.player.profile.name }));
@@ -402,6 +435,9 @@ io.on("connection", socket => {
     if (invite?.to === id) invites.delete(roomId);
   });
   socket.on("match:state", payload => {
+    const now = Date.now();
+    if (now - (socket.data.lastState || 0) < 30) return; // client sends at most every 100 ms
+    socket.data.lastState = now;
     const roomId = cleanText(payload?.roomId, 32);
     const match = activeMatches.get(roomId);
     if (!match || !match.players.has(id) || !socket.rooms.has(roomId)) return;
@@ -427,7 +463,8 @@ io.on("connection", socket => {
   });
   socket.on("disconnect", () => {
     socketsByPlayer.get(id)?.delete(socket);
-    if (!socketsByPlayer.get(id)?.size) socketsByPlayer.delete(id);
+    if (socketsByPlayer.get(id)?.size) return; // another tab or device is still connected
+    socketsByPlayer.delete(id);
     for (const [roomId, match] of activeMatches) {
       if (match.players.has(id)) {
         activeMatches.delete(roomId);
@@ -441,4 +478,7 @@ io.on("connection", socket => {
 });
 loadData();
 loadYoutubeAccess();
+if (youtubeAdminPlayers.size === 0) console.warn("[config] No valid YOUTUBE_ADMIN_PLAYER_IDS set. Admin features are disabled.");
+console.log("Player data file:", DATA_FILE, "(use a persistent path via ECLIPSE_DATA_FILE if the host resets its disk)");
+for (const sig of ["SIGINT", "SIGTERM"]) process.on(sig, () => { flushDataSync(); process.exit(0); });
 server.listen(PORT, () => console.log("Eclipse Arena API listening on " + PORT));
