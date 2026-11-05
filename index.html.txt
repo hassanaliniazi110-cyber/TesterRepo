@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#C7FF4A">
+  <title>Apex Strikers — Ultimate Football Game</title>
+  <meta name="description" content="Apex Strikers is an exciting football game featuring penalty shootouts, free kicks, long shots, goalkeeping challenges, player cards, and more. Step into the arena and own the game.">
+  <meta name="application-name" content="Apex Strikers">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Apex Strikers — Ultimate Football Game">
+  <meta property="og:description" content="Take on penalty shootouts, free kicks, long shots, and goalkeeping challenges in Apex Strikers. Your pitch. Your moment.">
+  <meta property="og:url" content="https://hassanaliniazi110-cyber.github.io/EclipseArena/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Apex Strikers — Ultimate Football Game">
+  <meta name="twitter:description" content="A football game with penalty shootouts, free kicks, long shots, and goalkeeping challenges.">
+  <link rel="stylesheet" href="style.css?v=lime-lock-v3">
+  <link rel="stylesheet" href="fought-knight.css?v=lime-lock-v3">
+  <script src="config.js?v=1"></script>
+  <script src="script.js?v=jujalarim-funk-slowed-reverb-20261019-6" defer></script>
+</head>
+<body>
+  <div class="intro-splash" role="status" aria-label="Entering Apex Strikers">
+    <div class="intro-orbit intro-orbit-a"></div><div class="intro-orbit intro-orbit-b"></div>
+    <div class="intro-emblem">A</div>
+    <div class="intro-wordmark">APEX <b>STRIKERS</b></div>
+    <div class="intro-caption">PREPARING THE PITCH</div>
+    <div class="intro-progress"><span></span></div>
+  </div>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Apex Strikers home"><span class="brand-mark">A</span><span>APEX <b>STRIKERS</b><small>FOOTBALL LAB</small></span></a>
+      <div class="top-actions"><span class="live-dot"></span><span class="online-label">ARENA LIVE</span><button id="soundBtn" class="icon-btn" aria-label="Toggle sound">♪</button></div>
+    </header>
+
+    <main>
+      <section id="homeScreen" class="screen home-screen">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow"><span></span> YOUR PITCH. YOUR MOMENT.</p>
+            <h1>OWN THE<br><em>GAME.</em></h1>
+            <p class="hero-text">Step into the lights. Pick your challenge. Make every touch count.</p>
+            <button id="playNowBtn" class="primary-btn">ENTER THE ARENA <span>↗</span></button>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="sun-glow"></div><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+            <div class="hero-ball"><div class="ball-pattern"></div></div>
+            <div class="hero-stadium"></div>
+            <div class="hero-stat"><strong>90'</strong><span>YOUR TIME TO SHINE</span></div>
+          </div>
+          <div class="hero-index">01 <span>/ 04</span></div>
+        </div>
+
+        <section class="mode-section">
+          <div class="section-heading"><div><p class="eyebrow">CHOOSE YOUR CHALLENGE</p><h2>Pick your <em>mode.</em></h2></div><span class="section-count">08 MODES + YOUTUBE</span></div>
+          <div class="mode-grid">
+            <button class="mode-card penalty" data-mode="penalty"><span class="mode-number">01</span><span class="mode-icon">◎</span><span class="mode-title">PENALTY</span><span class="mode-desc">Stay cool. Find the corner.</span><span class="mode-arrow">↗</span></button>
+            <button class="mode-card freekick" data-mode="freekick"><span class="mode-number">02</span><span class="mode-icon">⌁</span><span class="mode-title">FREE KICK</span><span class="mode-desc">Bend it around the wall.</span><span class="mode-arrow">↗</span></button>
+            <button class="mode-card longshot" data-mode="longshot"><span class="mode-number">03</span><span class="mode-icon">↗</span><span class="mode-title">LONG SHOT</span><span class="mode-desc">Power from outside the box.</span><span class="mode-arrow">↗</span></button>
+            <button class="mode-card goalie" data-mode="goalkeeping"><span class="mode-number">04</span><span class="mode-icon">✦</span><span class="mode-title">GOALKEEPER</span><span class="mode-desc">Read it. React. Make the save.</span><span class="mode-arrow">↗</span></button>
+            <button class="mode-card random-rush" data-mode="random"><span class="mode-number">05</span><span class="mode-icon">🎲</span><span class="mode-title">RANDOM RUSH</span><span class="mode-desc">Get a surprise challenge every time.</span><span class="mode-arrow">↗</span></button>
+            <button class="mode-card vs-attack" data-mode="vsattack"><span class="mode-number">06</span><span class="mode-icon">⚡</span><span class="mode-title">VS ATTACK</span><span class="mode-desc">Five attacks. Beat your rival.</span><span class="mode-arrow">↗</span></button>
+            <button class="mode-card crossbar" data-mode="crossbar"><span class="mode-number">07</span><span class="mode-icon">🎯</span><span class="mode-title">CROSSBAR CHALLENGE</span><span class="mode-desc">Hit the target zone beneath the bar.</span><span class="mode-arrow">↗</span></button>
+            <button class="mode-card goalie survival-mode" data-mode="survival"><span class="mode-number">08</span><span class="mode-icon">🧤</span><span class="mode-title">SURVIVAL SAVES</span><span class="mode-desc">Choose your dive and keep saving.</span><span class="mode-arrow">↗</span></button>
+            <button class="mode-card youtube-area" type="button" data-open-youtube><span class="mode-number">09</span><span class="mode-icon">▶</span><span class="mode-title">YOUTUBE AREA</span><span class="mode-desc">Search channels and watch videos.</span><span class="mode-arrow">↗</span></button>
+          </div>
+        </section>
+
+        <section class="roster-section">
+          <div class="section-heading"><div><p class="eyebrow">BUILD YOUR SQUAD</p><h2>Choose your <em>player.</em></h2></div><span class="section-count">SELECT ONE</span></div>
+          <div id="playerGrid" class="player-grid"></div>
+          <div class="goalkeeper-pick">
+            <div class="section-heading keeper-heading"><div><p class="eyebrow">LAST LINE OF DEFENCE</p><h2>Choose your <em>goalkeeper.</em></h2></div><span class="section-count">SELECT ONE</span></div>
+            <div id="goalkeeperGrid" class="player-grid goalie-selection-grid"></div>
+          </div>
+          <div class="setup-row"><label for="difficulty">DIFFICULTY</label><div id="difficultyGroup" class="difficulty-group"><button data-difficulty="Rookie">ROOKIE</button><button class="selected" data-difficulty="Pro">PRO</button><button data-difficulty="Legend">LEGEND</button></div></div>
+        </section>
+      </section>
+
+      <section id="gameScreen" class="screen game-screen hidden">
+        <div class="game-header"><button id="backBtn" class="back-btn">← HOME</button><div><p class="eyebrow">APEX STRIKERS</p><h2 id="gameTitle">PENALTY <em>MODE</em></h2></div><div class="score-box"><span>SCORE</span><strong id="scoreValue">0</strong></div></div>
+        <div class="game-layout">
+          <div class="pitch-wrap">
+            <div class="pitch-topline"><span id="roundLabel">ATTEMPT 01</span><span id="difficultyLabel">PRO LEVEL</span></div>
+            <canvas id="pitch" aria-label="Interactive football pitch. Tap or drag to aim."></canvas>
+            <div class="aim-tip" id="aimTip">TAP THE GOAL TO AIM · PRESS SHOOT</div>
+            <div id="matchHud" class="match-hud hidden"><div class="match-scoreline"><span>YOU</span><strong id="matchScore">0 - 0</strong><span>RIVAL</span></div><strong id="matchClock">00:00</strong><span id="matchRank">ROOKIE III · 0 PTS</span></div>
+            <div id="matchControls" class="match-controls hidden"><div class="match-move-pad" aria-label="Player movement"><button type="button" data-move="up" aria-label="Move up">▲</button><div><button type="button" data-move="left" aria-label="Move left">◀</button><button type="button" data-move="down" aria-label="Move down">▼</button><button type="button" data-move="right" aria-label="Move right">▶</button></div></div><div class="match-action-pad"><button type="button" data-action="sprint">SPRINT</button><button type="button" data-action="pass">PASS</button><button type="button" data-action="tackle">TACKLE</button><button type="button" data-action="shoot">SHOOT</button></div></div>
+            <div id="matchResult" class="match-result hidden"></div>
+          </div>
+          <aside class="controls-panel">
+            <p class="eyebrow">MATCH CONTROLS</p><h3 id="controlHeading">Pick your corner.</h3>
+            <p id="controlText" class="control-text">Drag on the goal to aim, then shoot.</p>
+            <div class="power-label"><span>SHOT POWER</span><strong id="powerReadout">78%</strong></div>
+            <input id="powerSlider" type="range" min="25" max="100" value="78" aria-label="Shot power">
+            <div class="control-actions"><button id="shootBtn" class="primary-btn shoot-btn">SHOOT <span>↗</span></button><button id="nextBtn" class="secondary-btn hidden">NEXT ATTEMPT →</button></div>
+            <div class="game-feedback" id="feedback" aria-live="polite">Ready when you are.</div>
+            <section class="music-panel" aria-label="Game soundtrack">
+              <div class="music-panel-heading"><span class="music-note">♫</span><div><p class="eyebrow">SOUNDTRACK</p><strong>Pick your vibe</strong></div></div>
+              <label class="music-label" for="musicSelect">MUSIC STYLE OR SONG</label>
+              <select id="musicSelect" class="music-select">
+                <optgroup label="HASSAN’S PICKS — ALL PHONK">
+                  <option value="montagemguerriero">Montagem Guerreiro — Avenxir &amp; SUNJI</option>
+                  <option value="montagemabnormal">Montagem Abnormal — Ultra Slowed (5:26)</option>
+                  <option value="montagemtomada">Montagem Tomada</option>
+                  <option value="montagemcoral">Montagem Coral</option>
+                  <option value="montagemmysterious">Montagem Mysterious Game</option>
+                  <option value="montagemxonada">Montagem Xonada</option>
+                  <option value="montagembailao">Montagem Bailão</option>
+                  <option value="montagemsupersonic">Montagem Supersonic</option>
+                  <option value="montagemrugada">Montagem Rugada (Slowed + Reverb)</option>
+                  <option value="montagemnobatidao">No Batidão</option>
+                  <option value="montagemluar">Montagem Luar</option>
+                  <option value="montagembelenos">Montagem Belenos</option>
+                  <option value="montagemyueshi">Montagem Yueshi</option>
+                  <option value="montagemela">Montagem Ela</option>
+                  <option value="montagemartemis">Montagem Artemis</option>
+                  <option value="montagemyumei">Montagem Yumei</option>
+                  <option value="montagemmaldito">Montagem Maldito</option>
+                  <option value="montagemsemparar">Montagem Sem Parar</option>
+                  <option value="montagembrother">Montagem Brother</option>
+                  <option value="montagemabismo">Montagem Abismo</option>
+                  <option value="montagemalquimia">Montagem Alquimia</option>
+                  <option value="montagemmatadora">Montagem Matadora</option>
+                  <option value="montagemhomagefunk">Montagem Homage Funk</option>
+                  <option value="montagemacelerada">Montagem Acelerada</option>
+                  <option value="montagemvocenamira">Montagem Você Na Mira</option>
+                  <option value="montagemgozalo">Montagem Gozalo</option>
+                  <option value="montagemvemvem">Montagem Vem Vem</option>
+                  <option value="montagemperigosa">Montagem Perigosa</option>
+                  <option value="montagempassobemsolto">Montagem Passo Bem Solto</option>
+                  <option value="brazilianphonk2026">Brazilian Phonk Mix 2026</option>
+                </optgroup>
+                <optgroup label="ORIGINAL GAME BEATS">
+                  <option value="hiphop">Hip-hop bounce · Original</option>
+                  <option value="phonk">Phonk drive · Original</option>
+                  <option value="phonkdrift">Phonk Drift Mix</option>
+                  <option value="phonkaggressive">Aggressive Phonk Mix</option>
+                  <option value="phonknightdrive">Night Drive Phonk</option>
+                  <option value="phonkvelocity">Velocity Phonk</option>
+                  <option value="phonkmontagem">Brazilian Montagem Phonk</option>
+                  <option value="phonkultraslowed">Ultra Slowed Phonk</option>
+                  <option value="phonkfunk">Brazilian Funk Phonk</option>
+                  <option value="phonkedit">Football Edit Phonk</option>
+                  <option value="phonkdark">Dark Phonk Mix</option>
+                  <option value="phonkenergy">High Energy Phonk</option>
+
+                  <option value="jazz">Jazz lounge · Original</option>
+                  <option value="stadium">Stadium anthem · Original</option>
+                  <option value="lofi">Lo-fi chill · Original</option>
+                  <option value="edm">EDM energy · Original</option>
+                  <option value="funk">Brazilian funk vibe · Original</option>
+                  <option value="silence">No music</option>
+                </optgroup>
+                <optgroup label="FIFA WORLD CUP 2026 OFFICIAL SONGS">
+                  <option value="wc26daidai">Dai Dai — Shakira &amp; Burna Boy</option>
+                  <option value="wc26goals">Goals — LISA, Anitta &amp; Rema</option>
+                  <option value="wc26gametime">Game Time — Future &amp; Tyla</option>
+                  <option value="wc26illuminate">Illuminate — Jessie Reyez &amp; Elyanna</option>
+                  <option value="wc26echo">Echo — Daddy Yankee &amp; Shenseea</option>
+                  <option value="wc26dna">DNA — Andrea Bocelli, David Guetta, EJAE &amp; Megan Thee Stallion</option>
+                </optgroup>
+                <optgroup label="MORE OFFICIAL SONGS — IN-GAME PLAYER">
+                  <option value="speed">iShowSpeed — World Cup (Champions)</option>
+                  <option value="dreamers">Jung Kook — Dreamers</option>
+                  <option value="waka">Shakira — Waka Waka</option>
+                  <option value="nights">Avicii — The Nights</option>
+                  <option value="believer">Imagine Dragons — Believer</option>
+                  <option value="seven">The White Stripes — Seven Nation Army</option>
+                  <option value="sunflower">Post Malone &amp; Swae Lee — Sunflower</option>
+                  <option value="dynamite">BTS — Dynamite</option>
+                  <option value="desire">Robbie Williams &amp; Nicole Scherzinger — Desire</option>
+                  <option value="jujalarimfunk">JUJALARIM FUNK 2.0 (SLOWED + REVERB) — 1VRYA</option>
+                  <option value="brazilianphonk2026">Brazilian Phonk — 2026 Mix</option>
+                  <option value="montagemalquimia">Montagem Alquimia</option>
+                  <option value="montagemmatadora">Matadora</option>
+                  <option value="montagemhomagefunk">Homage Funk</option>
+                  <option value="montagemacelerada">Acelerada</option>
+                  <option value="montagemvocenamira">Você na Mira</option>
+                  <option value="montagemgozalo">Gozalo</option>
+                  <option value="montagemvemvem">Vem Vem</option>
+                  <option value="montagempassobemsolto">Passo Bem Solto</option>
+                  <option value="montagemperigosa">Montagem Perigosa</option>
+                  <option value="takefive">Jazz — Dave Brubeck, Take Five</option>
+                  <option value="flymoon">Jazz — Fly Me to the Moon</option>
+                  <option value="autumnleaves">Jazz — Autumn Leaves</option>
+                  <option value="sowhat">Jazz — Miles Davis, So What</option>
+                  <option value="entertainer">Ragtime/Jazz — The Entertainer</option>
+                </optgroup>
+              </select>
+              <div class="music-quick-songs" aria-label="Quick play requested songs">
+                <button id="playMontagemGuerreiroBtn" type="button" class="music-quick-song-btn">▶ MONTAGEM GUERREIRO</button>
+                <button id="playMontagemAbnormalBtn" type="button" class="music-quick-song-btn">▶ MONTAGEM ABNORMAL</button>
+              </div>
+              <div class="music-actions"><button id="musicPlayBtn" type="button" class="music-play-btn">▶ PLAY BEAT</button><button id="musicStopBtn" type="button" class="music-stop-btn">■ STOP</button></div>
+              <button id="musicOfficialBtn" type="button" class="music-official-btn hidden">▶ PLAY SONG IN GAME</button>
+              <div id="musicEmbedWrap" class="music-embed-wrap hidden">
+                <iframe id="musicEmbedPlayer" title="In-game soundtrack player" src="about:blank" allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+              <p id="musicStatus" class="music-status" aria-live="polite">Choose a style or song. Official songs play here on the game screen.</p>
+            </section>
+
+            <div id="keeperPad" class="keeper-pad hidden"><span>GOALKEEPER DIVE</span><div><button data-dive="left">↙ LEFT</button><button data-dive="center">↑ CENTRE</button><button data-dive="right">RIGHT ↘</button></div></div>
+            <div class="touch-note"><span class="touch-dot"></span> MADE FOR TOUCH · IPAD READY</div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="youtubeScreen" class="screen youtube-screen hidden">
+        <div class="game-header youtube-header">
+          <button id="youtubeBackBtn" class="back-btn" type="button">← HOME</button>
+          <div><p class="eyebrow">APEX STRIKERS</p><h2>YOUTUBE <em>AREA</em></h2></div>
+        </div>
+        <div id="youtubeAccessGate" class="youtube-access-gate" role="status" aria-live="polite">Checking your permission with the Apex Strikers server…</div>
+        <form id="youtubeAccessRequestForm" class="youtube-access-request hidden">
+          <p class="eyebrow">REQUEST ACCESS</p><h3>Ask the owner to unlock this area.</h3>
+          <label class="music-label" for="youtubeAccessMessage">MESSAGE TO THE OWNER</label>
+          <textarea id="youtubeAccessMessage" maxlength="240" placeholder="Hi! Please can I access the YouTube Area?"></textarea>
+          <button class="music-play-btn" type="submit">SEND ACCESS REQUEST</button>
+          <p id="youtubeRequestStatus" class="music-status" aria-live="polite"></p>
+        </form>
+        <section id="youtubeOwnerRequests" class="youtube-owner-requests hidden">
+          <div class="youtube-section-title"><h3>OWNER · ACCESS REQUESTS</h3><button id="youtubeRefreshRequests" type="button">REFRESH</button></div>
+          <div id="youtubeOwnerRequestList"></div>
+        </section>
+        <section class="youtube-panel">
+          <div class="youtube-panel-heading"><span class="music-note">▶</span><div><p class="eyebrow">EXPLORE THE WORLD</p><h3>Find your next <em>watch.</em></h3></div></div>
+          <p class="youtube-help">Browse FC Mobile, Roblox, Minecraft, football and other channels. Save favourites, open channels on YouTube, or play supported playlists inside the game.</p>
+          <form id="youtubeSearchForm" class="youtube-search-form">
+            <label class="music-label" for="youtubeSearchInput">SEARCH THE IN-GAME CHANNEL DIRECTORY</label>
+            <div class="youtube-search-row"><input id="youtubeSearchInput" class="music-select" type="search" placeholder="Search football, gaming, science, music..." autocomplete="off"><button class="music-play-btn" type="submit">SEARCH</button></div>
+          </form>
+          <div class="youtube-quick-searches" aria-label="Popular search topics">
+            <button type="button" data-youtube-search="football">Football</button>
+            <button type="button" data-youtube-search="gaming">Gaming</button>
+            <button type="button" data-youtube-search="science">Science</button>
+            <button type="button" data-youtube-search="music">Music</button>
+            <button type="button" data-youtube-search="technology">Technology</button>
+            <button type="button" data-youtube-search="comedy">Comedy</button>
+          </div>
+          <section class="youtube-channel-section">
+            <div class="youtube-section-title"><h3>★ YOUR PREFERRED CHANNELS</h3><span>Tap ☆ to save favourites</span></div>
+            <div id="youtubePreferredGrid" class="youtube-channel-grid"></div>
+          </section>
+          <section class="youtube-channel-section">
+            <div class="youtube-section-title"><h3>CHANNEL DIRECTORY</h3><span id="youtubeChannelCount">15 channels</span></div>
+            <div id="youtubeDirectoryGrid" class="youtube-channel-grid"></div>
+          </section>
+          <form id="youtubeWatchForm" class="youtube-watch-form">
+            <label class="music-label" for="youtubeVideoUrl">OR WATCH A SPECIFIC VIDEO / PLAYLIST</label>
+            <div class="youtube-search-row"><input id="youtubeVideoUrl" class="music-select" type="url" placeholder="Paste a YouTube video or playlist URL" autocomplete="url"><button class="music-play-btn" type="submit">LOAD HERE</button></div>
+          </form>
+          <div class="youtube-player-wrap"><iframe id="youtubeAreaPlayer" title="YouTube Area video player" src="about:blank" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+          <p id="youtubeAreaStatus" class="music-status" aria-live="polite">Choose PLAY IN GAME for supported playlists, or OPEN CHANNEL to visit a creator on YouTube. Some videos may block embedded playback.</p>
+        </section>
+      </section>
+    </main>
+    <footer><span>© APEX STRIKERS</span><span>PLAY FAIR. PLAY BOLD.</span><button id="resetBtn">RESET GAME ↻</button></footer>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+/* ECLIPSE ARENA — CINEMATIC ESPORTS TYPOGRAPHY
+   Orbitron for bold display titles; Rajdhani for readable game interface.
+   This file is linked after style.css in index.html.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+:root {
+  --arena-display-font: "Orbitron", sans-serif;
+  --arena-ui-font: "Rajdhani", "Barlow Condensed", sans-serif;
+}
+
+/* Interface font across the full app */
+html,
+body,
+.app-shell,
+.app-shell *,
+.intro-splash,
+.intro-splash * {
+  font-family: var(--arena-ui-font) !important;
+}
+
+/* Angular display font for logos, titles, scores and important controls */
+h1,
+h2,
+h3,
+.brand,
+.brand-mark,
+.intro-wordmark,
+.intro-emblem,
+.mode-title,
+.player-rating,
+.game-header h2,
+.section-count,
+.eyebrow,
+.primary-btn,
+.secondary-btn,
+.back-btn,
+.score-box strong,
+.hero-stat strong {
+  font-family: var(--arena-display-font) !important;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+
+/* Add depth while preserving the existing black-and-lime visual theme */
+h1 {
+  text-shadow: 0 0 26px rgba(0,229,255, 0.18), 2px 2px 0 rgba(0,229,255, 0.12);
+}
+
+h2,
+.game-header h2 {
+  text-shadow: 0 0 18px rgba(0,229,255, 0.14);
+}
+
+.mode-title,
+.primary-btn,
+.secondary-btn,
+.back-btn {
+  letter-spacing: 0.07em;
+}
+
+.primary-btn {
+  box-shadow: 0 0 0 1px rgba(0,229,255, 0.28), 0 7px 22px rgba(0,229,255, 0.15);
+}
+
+.mode-card {
+  background-image: linear-gradient(135deg, rgba(0,229,255,.055), transparent 48%), linear-gradient(145deg,#15231d,#0b1512);
+}
+
+.mode-card:hover,
+.mode-card.active {
+  box-shadow: 0 0 0 1px rgba(0,229,255,.15), 0 12px 28px rgba(0,0,0,.22), inset 0 0 26px rgba(0,229,255,.05);
+}
+
+
+/* INTRO WORDMARK: keep ECLIPSE and ARENA in one identical typeface.
+   The colour distinction remains; only the font styling is unified. */
+.intro-splash .intro-wordmark,
+.intro-splash .intro-wordmark b {
+  font-family: "Orbitron", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 900 !important;
+  letter-spacing: clamp(1px, .55vw, 4px) !important;
+  text-transform: uppercase !important;
+}
+
+
+/* Server-verified YouTube Area access gate */
+.youtube-screen:not(.youtube-authorized) .youtube-panel{display:none!important}
+.youtube-access-gate{margin:clamp(18px,4vw,42px) auto;padding:clamp(22px,4vw,36px);max-width:760px;border:1px solid rgba(0,229,255,.42);border-radius:18px;background:linear-gradient(135deg,rgba(0,229,255,.09),rgba(8,18,16,.96) 55%,rgba(29,44,34,.8));color:#ffe0d7;font:600 clamp(14px,2vw,18px)/1.6 "Rajdhani",sans-serif;letter-spacing:.04em;text-align:center;box-shadow:0 0 32px rgba(0,229,255,.08),inset 0 1px rgba(255,255,255,.04)}
+.youtube-screen.youtube-authorized .youtube-access-gate{display:none}
+
+/* Owner-approved YouTube Area requests */
+.youtube-access-request,.youtube-owner-requests{margin:18px 0;padding:20px;border:1px solid rgba(0,229,255,.35);border-radius:16px;background:rgba(10,18,8,.92)}
+.youtube-access-request h3{margin:6px 0 14px;color:#f5f7ef}.youtube-access-request textarea{display:block;width:100%;min-height:84px;margin:10px 0;padding:12px;border:1px solid rgba(0,229,255,.35);border-radius:10px;background:#10150d;color:#fff;font:inherit;resize:vertical}
+.youtube-owner-requests .youtube-section-title{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.youtube-owner-request{margin-top:12px;padding:14px;border:1px solid rgba(255,255,255,.12);border-radius:12px;background:rgba(255,255,255,.03)}.youtube-owner-request p{overflow-wrap:anywhere}.youtube-owner-request-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}.youtube-owner-request button,.youtube-owner-requests #youtubeRefreshRequests{padding:9px 12px;border:1px solid rgba(0,229,255,.45);border-radius:9px;background:#00E5FF;color:#111;font-weight:800}.youtube-owner-request button[data-decision="decline"]{background:transparent;color:#f5f7ef;border-color:rgba(255,255,255,.3)}
+
+
+/* Red-orange theme override */
+:root { --lime: #00E5FF !important; }
+
+
+/* Electric cyan accent theme */
+:root { --lime: #00E5FF !important; }
+
+
+/* Apex Strikers three-accent palette */
+:root{--arena-cyan:#00E5FF;--arena-gold:#D4AF37;--arena-orange:#FF9500;}
+/* Legendary reward cards use gold; cyan remains the main UI accent. */
+.player-collect-card{border-color:rgba(212,175,55,.55);box-shadow:0 0 18px rgba(212,175,55,.08),inset 0 0 18px rgba(212,175,55,.04);background-image:linear-gradient(135deg,rgba(212,175,55,.09),transparent 58%)}
+.youtube-access-gate,.youtube-access-request,.youtube-owner-requests{border-color:rgba(0,229,255,.42)}
+.youtube-owner-request button{background:#00E5FF;border-color:#00E5FF}
+
+
+/* Apex Strikers palette balance: electric cyan stays primary; Solar Orange is now visible across key action areas. */
+:root{
+  --arena-cyan:#00E5FF;
+  --arena-gold:#D4AF37;
+  --arena-orange:#FF9500;
+  --arena-orange-bright:#FFB340;
+  --arena-orange-glow:rgba(255,149,0,.28);
+}
+/* Solar Orange highlights on the hero artwork and its energy rings. */
+.hero-art:before{
+  background:repeating-linear-gradient(90deg,transparent 0 55px,rgba(255,149,0,.045) 56px 57px);
+}
+.sun-glow{
+  background:rgba(255,149,0,.16);
+  box-shadow:0 0 42px rgba(255,149,0,.12);
+}
+.orbit-one{border-color:rgba(255,149,0,.42)}
+.orbit-two{border-color:rgba(255,149,0,.25)}
+.hero-stat strong{color:var(--arena-orange)}
+.hero-index{color:var(--arena-orange)}
+/* Orange on selected gameplay actions, challenge highlights and active states. */
+.mode-card.longshot,
+.mode-card.longshot:hover,
+.mode-card.longshot.active{
+  border-color:rgba(255,149,0,.82);
+  box-shadow:inset 0 0 22px rgba(255,149,0,.07);
+}
+.longshot .mode-icon,.longshot .mode-arrow{color:var(--arena-orange)}
+.match-action-pad button[data-action="shoot"]{
+  background:linear-gradient(135deg,var(--arena-orange-bright),var(--arena-orange))!important;
+  border-color:var(--arena-orange)!important;
+  color:#171006!important;
+  box-shadow:0 0 15px var(--arena-orange-glow);
+}
+.match-action-pad button[data-action="tackle"]{border-color:var(--arena-orange)!important}
+.primary-btn:hover,.music-play-btn:hover,.music-official-btn:hover{
+  box-shadow:0 0 18px var(--arena-orange-glow);
+  border-color:var(--arena-orange);
+}
+/* Orange marks progress and power, while cyan remains the normal UI focus colour. */
+.progress-fill,.xp-bar-fill,.shot-power-fill,.power-meter-fill,
+.season-progress>i span{background:linear-gradient(90deg,var(--arena-orange-bright),var(--arena-orange))!important}
+#powerSlider{accent-color:var(--arena-orange)}
+/* Soundtrack and online indicators get small orange details for a more mixed palette. */
+.music-note{color:var(--arena-orange);border-color:rgba(255,149,0,.45)}
+.live-dot{background:var(--arena-orange);box-shadow:0 0 12px var(--arena-orange-glow)}
+.toast{border:1px solid var(--arena-orange);box-shadow:0 0 18px var(--arena-orange-glow)}
+/* Keep cyan for focus and general interface; use orange only for emphasis. */
+
+
+/* FINAL OVERRIDE — all intro and player accents use lime green on black. */
+:root{--arena-cyan:#c7ff4a;--arena-gold:#c7ff4a;--arena-orange:#c7ff4a;--arena-orange-bright:#dcff80;--arena-orange-glow:rgba(199,255,74,.25)}
+.intro-splash,.intro-splash *{--arena-cyan:#c7ff4a;--arena-orange:#c7ff4a;color:inherit}
+.intro-splash{background:#050705!important}
+.intro-splash:before{background:radial-gradient(ellipse at 50% 48%,rgba(199,255,74,.16),transparent 38%)!important}
+.intro-orbit,.intro-orbit-a,.intro-orbit-b{border-color:rgba(199,255,74,.55)!important}
+.intro-emblem{background:#c7ff4a!important;color:#050705!important;box-shadow:0 0 45px #c7ff4a55,0 0 90px #c7ff4a22!important}
+.intro-wordmark{color:#f4f8ef!important;text-shadow:0 0 18px #c7ff4a22!important}
+.intro-wordmark b{color:#c7ff4a!important}
+.intro-progress span{background:#c7ff4a!important}
+.player-rating,.player-collect-card small,.player-collect-card>small{color:#c7ff4a!important}
+.player-collect-card{border-color:rgba(199,255,74,.5)!important;background-image:linear-gradient(145deg,rgba(199,255,74,.07),#080a07 65%)!important}
+
+
+/* FINAL PLAYER-STAT + ACCENT COLOR LOCK: lime green and black only. */
+:root{--arena-cyan:#c7ff4a!important;--arena-gold:#c7ff4a!important;--arena-orange:#c7ff4a!important;--arena-orange-bright:#dcff80!important;--orange:#c7ff4a!important;--electric-cyan:#c7ff4a!important;--cyan:#c7ff4a!important;--blue:#c7ff4a!important}
+.fc-attributes,.fc-attributes *,.player-rating,.player-role,.player-special,.player-stats,.player-stats *,.player-stat,.player-stat *,.stat-value,.stat-label,.player-card .stats,.player-card .stats *{color:#c7ff4a!important;border-color:rgba(199,255,74,.55)!important;accent-color:#c7ff4a!important}
+.fc-attributes i,.fc-attributes em,.stat-bar-fill,.player-stat-fill,.stat-fill,.attribute-fill,.player-card .fill{background:#c7ff4a!important;background-image:none!important}
+.player-card,.player-collect-card,.mode-card,.freekick,.longshot,.goalie{--player-glow:rgba(199,255,74,.12)!important;--card-glow:rgba(199,255,74,.12)!important}

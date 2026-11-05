@@ -1,0 +1,717 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&family=Orbitron:wght@700;800;900&family=Chakra+Petch:wght@500;600;700&display=swap');
+
+/* Cinematic first-load intro */
+.intro-splash{position:fixed;inset:0;z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;background:#050b09;color:var(--white);animation:intro-exit .7s ease-in 2.6s forwards;pointer-events:none}
+.intro-splash:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 48%,rgba(199,255,74,.16),transparent 38%),linear-gradient(135deg,transparent 48%,rgba(199,255,74,.035) 49%,transparent 50%);opacity:0;animation:intro-light .9s ease-out .15s forwards}
+.intro-orbit{position:absolute;width:min(74vw,520px);height:min(30vw,180px);border:1px solid rgba(199,255,74,.25);border-radius:50%;left:50%;top:43%;opacity:0}
+.intro-orbit-a{transform:translate(-50%,-50%) rotate(-24deg);animation:intro-orbit-in 1.1s ease-out .1s forwards}
+.intro-orbit-b{transform:translate(-50%,-50%) rotate(24deg) scale(1.2);animation:intro-orbit-in 1.1s ease-out .22s forwards}
+.intro-emblem{position:relative;display:grid;place-items:center;width:78px;height:78px;background:var(--lime);color:#10180c;font:900 54px 'Orbitron',sans-serif;letter-spacing:-5px;clip-path:polygon(12% 0,100% 0,88% 88%,0 100%);opacity:0;transform:translateY(18px) scale(.72);animation:intro-logo .65s cubic-bezier(.2,.8,.2,1) .18s forwards;box-shadow:0 0 45px #c7ff4a55,0 0 90px #c7ff4a22}
+.intro-wordmark{position:relative;margin-top:19px;font:900 clamp(20px,4.7vw,34px)/1 'Orbitron',sans-serif;letter-spacing:clamp(1px,.55vw,4px);text-transform:uppercase;text-shadow:0 0 18px #c7ff4a22;opacity:0;transform:translateY(12px);animation:intro-text .5s ease-out .48s forwards}
+.intro-wordmark b{color:var(--lime);text-shadow:0 0 16px #c7ff4a66}
+.intro-caption{position:relative;margin-top:16px;color:#93a79d;font-size:9px;font-weight:800;letter-spacing:3px;opacity:0;animation:intro-text .4s ease-out .75s forwards}
+.intro-progress{position:relative;width:150px;height:2px;margin-top:23px;background:#ffffff1b;overflow:hidden;opacity:0;animation:intro-text .25s ease-out .7s forwards}
+.intro-progress span{display:block;width:100%;height:100%;background:var(--lime);transform:translateX(-101%);animation:intro-loading 1.15s cubic-bezier(.65,0,.35,1) .78s forwards}
+@keyframes intro-exit{to{opacity:0;visibility:hidden}}
+@keyframes intro-light{to{opacity:1}}
+@keyframes intro-orbit-in{from{opacity:0;scale:.8}to{opacity:1;scale:1}}
+@keyframes intro-logo{to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes intro-text{to{opacity:1;transform:translateY(0)}}
+@keyframes intro-loading{to{transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){.intro-splash{animation:intro-exit .25s linear 1.5s forwards}.intro-splash *{animation-duration:.25s!important;animation-delay:0ms!important}}
+
+
+:root{--bg:#07110f;--panel:#101b18;--panel2:#15231f;--line:rgba(220,255,235,.12);--muted:#93a79d;--lime: #00E5FF;--white:#f2f7f2;--orange:#ff8c42}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:'DM Sans',sans-serif;min-height:100vh}button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible,input:focus-visible{outline:2px solid var(--lime);outline-offset:4px}.app-shell{max-width:1440px;margin:auto;padding:0 clamp(16px,4vw,64px);overflow:hidden}.topbar{height:84px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;gap:12px;align-items:center;text-decoration:none;color:var(--white);font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:800;letter-spacing:1.2px}.brand b{color:var(--lime)}.brand small{display:block;color:var(--muted);font:700 9px 'DM Sans',sans-serif;letter-spacing:3px;margin-top:3px}.brand-mark{display:grid;place-items:center;width:43px;height:43px;background:var(--lime);color:#101a0e;font:900 30px 'Barlow Condensed',sans-serif;clip-path:polygon(0 0,100% 0,82% 100%,0 82%)}.top-actions{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:10px;font-weight:800;letter-spacing:1.5px}.live-dot,.eyebrow span,.touch-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 14px #c7ff4a}.icon-btn{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--white);font-size:20px;margin-left:12px}.hero{position:relative;min-height:470px;display:grid;grid-template-columns:1fr 1.15fr;align-items:center;border-bottom:1px solid var(--line);isolation:isolate}.hero:before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse at 75% 55%,rgba(52,102,59,.25),transparent 50%),linear-gradient(110deg,transparent 50%,rgba(200,255,74,.025))}.hero-copy{padding:45px 0;z-index:2}.eyebrow{font-size:10px;font-weight:800;letter-spacing:2.4px;color:var(--lime);margin:0 0 15px}.eyebrow span{margin-right:8px}h1,h2,h3,p{margin-top:0}h1{font:900 clamp(65px,8.2vw,112px)/.82 'Barlow Condensed',sans-serif;letter-spacing:-2px;margin:20px 0 25px}h1 em,h2 em{color:var(--lime);font-style:normal}.hero-text{max-width:340px;color:#a8b8ae;line-height:1.75;font-size:14px;margin-bottom:27px}.primary-btn{border:0;background:var(--lime);color:#10180c;padding:16px 20px;font-size:11px;font-weight:900;letter-spacing:1.4px;display:inline-flex;justify-content:space-between;align-items:center;gap:35px;min-height:50px;transition:transform .18s,filter .18s}.primary-btn:hover{transform:translateY(-2px);filter:brightness(1.08)}.primary-btn span{font-size:18px}.hero-art{position:relative;min-height:420px;align-self:stretch;overflow:hidden;background:radial-gradient(ellipse at 50% 35%,rgba(188,255,82,.14),transparent 35%),linear-gradient(180deg,transparent,rgba(0,0,0,.25))}.hero-art:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 55px,rgba(255,255,255,.025) 56px 57px);mask-image:linear-gradient(transparent,#000 25%,#000 85%,transparent)}.sun-glow{position:absolute;width:250px;height:250px;left:42%;top:16%;border-radius:50%;background:rgba(199,255,74,.08);filter:blur(24px)}.orbit{position:absolute;left:50%;top:45%;border:1px solid rgba(199,255,74,.2);border-radius:50%;transform:translate(-50%,-50%) rotate(-25deg)}.orbit-one{width:370px;height:145px}.orbit-two{width:450px;height:205px;transform:translate(-50%,-50%) rotate(28deg)}.hero-ball{position:absolute;z-index:2;width:clamp(135px,18vw,220px);aspect-ratio:1;left:50%;top:45%;transform:translate(-50%,-50%) rotate(-16deg);border-radius:50%;background:radial-gradient(circle at 32% 22%,#fff 0,#e4e9df 25%,#8d9a8e 70%,#354039 100%);box-shadow:20px 35px 65px #0009,0 0 65px #c7ff4a22;overflow:hidden}.ball-pattern{position:absolute;inset:0;background:conic-gradient(from 20deg at 50% 50%,transparent 0 12%,#1b2821 12% 18%,transparent 18% 32%,#1b2821 32% 39%,transparent 39% 55%,#1b2821 55% 62%,transparent 62% 78%,#1b2821 78% 85%,transparent 85%);opacity:.85}.ball-pattern:after{content:"";position:absolute;inset:25%;border:12px solid #17251c;transform:rotate(45deg);clip-path:polygon(50% 0,100% 25%,82% 100%,18% 100%,0 25%)}.hero-stadium{position:absolute;bottom:-80px;left:-10%;width:120%;height:200px;border:2px solid #c7ff4a45;border-radius:50% 50% 0 0;background:repeating-linear-gradient(0deg,rgba(199,255,74,.06) 0 1px,transparent 1px 28px),linear-gradient(180deg,#1b3525,#0a1710);transform:perspective(260px) rotateX(20deg)}.hero-stat{position:absolute;right:5%;bottom:12%;display:flex;flex-direction:column;text-align:right;z-index:3}.hero-stat strong{font:900 43px 'Barlow Condensed',sans-serif;color:var(--lime)}.hero-stat span{font-size:8px;letter-spacing:1.6px;color:#b7c9bd}.hero-index{position:absolute;bottom:24px;left:0;font:800 12px 'Barlow Condensed',sans-serif;letter-spacing:2px;color:var(--lime)}.hero-index span{color:var(--muted)}.mode-section,.roster-section{padding:52px 0 48px;border-bottom:1px solid var(--line)}.section-heading{display:flex;justify-content:space-between;align-items:end;margin-bottom:22px}.section-heading .eyebrow{margin-bottom:8px}h2{font:800 clamp(29px,4vw,43px)/1 'Barlow Condensed',sans-serif;letter-spacing:.3px;margin-bottom:0}.section-count{font-size:9px;font-weight:800;letter-spacing:1.8px;color:var(--muted);padding-bottom:4px}.mode-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.mode-card{position:relative;text-align:left;min-height:180px;padding:20px;border:1px solid var(--line);background:linear-gradient(145deg,#15231d,#0b1512);color:var(--white);display:flex;flex-direction:column;align-items:flex-start;overflow:hidden;transition:border-color .2s,transform .2s}.mode-card:before{content:"";position:absolute;width:125px;height:125px;border-radius:50%;right:-48px;top:-43px;background:var(--card-glow,rgba(199,255,74,.1));filter:blur(4px)}.mode-card:hover,.mode-card.active{border-color:var(--lime);transform:translateY(-3px)}.penalty{--card-glow:rgba(199,255,74,.12)}.freekick{--card-glow:rgba(75,191,255,.15)}.longshot{--card-glow:rgba(255,140,66,.17)}.goalie{--card-glow:rgba(189,123,255,.17)}.mode-number{position:absolute;right:17px;top:17px;font-size:9px;color:#71857a;letter-spacing:1px}.mode-icon{font-size:28px;color:var(--lime);margin:6px 0 17px}.freekick .mode-icon{color:#62caff}.longshot .mode-icon{color:var(--orange)}.goalie .mode-icon{color:#cba0ff}.mode-title{font:800 23px 'Barlow Condensed',sans-serif;letter-spacing:1px}.mode-desc{font-size:10px;color:var(--muted);margin-top:6px;line-height:1.5}.mode-arrow{position:absolute;right:17px;bottom:17px;color:var(--lime);font-size:18px}.player-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.player-card{position:relative;min-height:130px;border:1px solid var(--line);padding:14px 12px;background:linear-gradient(145deg,#17251f,#0c1512);color:var(--white);text-align:left;overflow:hidden}.player-card:after{content:"";position:absolute;width:70px;height:70px;right:-25px;bottom:-22px;border-radius:50%;background:var(--player-glow,rgba(199,255,74,.12));filter:blur(5px)}.player-card.selected{border-color:var(--lime);box-shadow:inset 0 0 0 1px var(--lime)}.player-card.selected:before{content:"✓ SELECTED";position:absolute;right:8px;top:8px;font-size:7px;font-weight:900;color:var(--lime);letter-spacing:.6px}.player-rating{font:800 26px 'Barlow Condensed',sans-serif;color:var(--lime)}.player-role{font-size:8px;color:var(--muted);letter-spacing:1px;margin:2px 0 14px}.player-name{font-size:12px;font-weight:800;position:relative;z-index:1}.player-special{font-size:9px;color:#9fb0a5;margin-top:4px;position:relative;z-index:1}.setup-row{display:flex;align-items:center;gap:22px;margin-top:22px}.setup-row label{font-size:9px;font-weight:800;letter-spacing:1.8px;color:var(--muted)}.difficulty-group{display:flex;gap:6px}.difficulty-group button{padding:10px 14px;background:transparent;border:1px solid var(--line);color:var(--muted);font-size:9px;font-weight:800;letter-spacing:1px}.difficulty-group button.selected{background:var(--lime);border-color:var(--lime);color:#111a0c}footer{display:flex;align-items:center;justify-content:space-between;padding:24px 0;color:#73867a;font-size:9px;letter-spacing:1.5px;font-weight:800}footer button{background:none;border:0;color:var(--muted);font-size:9px;letter-spacing:1px}.hidden{display:none!important}.game-screen{padding:28px 0 48px}.game-header{display:flex;align-items:center;gap:22px;margin-bottom:24px}.back-btn,.secondary-btn{border:1px solid var(--line);background:transparent;color:var(--white);padding:12px 14px;font-size:10px;font-weight:800;letter-spacing:1px}.game-header .eyebrow{margin-bottom:5px}.game-header h2{font-size:32px}.score-box{margin-left:auto;padding:9px 18px;border:1px solid var(--line);display:flex;flex-direction:column;align-items:flex-end;min-width:90px}.score-box span{font-size:8px;color:var(--muted);letter-spacing:1.5px}.score-box strong{font:800 30px 'Barlow Condensed',sans-serif;color:var(--lime)}.game-layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(240px,.7fr);gap:18px}.pitch-wrap{position:relative;background:#0b1b12;border:1px solid var(--line);padding:12px;min-width:0}.pitch-topline{display:flex;justify-content:space-between;font-size:9px;font-weight:800;letter-spacing:1.5px;color:var(--lime);padding:4px 4px 10px}#pitch{width:100%;height:auto;aspect-ratio:1.36;display:block;touch-action:none;border:1px solid #c7ff4a2b;background:#164b2c}.aim-tip{font-size:8px;letter-spacing:1.2px;color:var(--muted);padding:12px 4px 3px;text-align:center}.controls-panel{background:var(--panel);border:1px solid var(--line);padding:23px;display:flex;flex-direction:column;align-items:stretch;min-width:0}.controls-panel .eyebrow{margin-bottom:12px}.controls-panel h3{font:800 28px/1.05 'Barlow Condensed',sans-serif;margin-bottom:10px}.control-text{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:24px}.power-label{display:flex;justify-content:space-between;font-size:9px;letter-spacing:1.4px;font-weight:800}.power-label strong{color:var(--lime)}#powerSlider{width:100%;accent-color:var(--lime);margin:17px 0 24px;touch-action:pan-x}.control-actions{display:grid;gap:8px}.shoot-btn{width:100%}.secondary-btn{width:100%;min-height:48px}.game-feedback{margin-top:18px;border-left:2px solid var(--lime);padding:10px 12px;background:#c7ff4a0b;font-size:11px;line-height:1.5;color:#d8e4da;min-height:42px}.touch-note{margin-top:auto;padding-top:24px;color:#728579;font-size:8px;font-weight:800;letter-spacing:1.3px;display:flex;align-items:center;gap:8px}.touch-dot{width:6px;height:6px}.keeper-pad{margin-top:18px}.keeper-pad>span{font-size:8px;letter-spacing:1.3px;color:var(--muted);font-weight:800}.keeper-pad>div{display:flex;gap:5px;margin-top:9px}.keeper-pad button{flex:1;min-width:0;background:#1d3025;color:var(--white);border:1px solid var(--line);padding:12px 4px;font-size:9px;font-weight:800}.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:var(--lime);color:#10180c;padding:12px 18px;font-size:11px;font-weight:800;opacity:0;pointer-events:none;transition:.25s;z-index:20}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){.hero{grid-template-columns:1fr 1fr;min-height:400px}.hero-art{min-height:360px}.mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.player-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.game-layout{grid-template-columns:minmax(0,1.2fr) minmax(220px,.8fr)}.controls-panel{padding:17px}}
+@media(max-width:600px){.app-shell{padding:0 15px}.topbar{height:68px}.brand{font-size:17px}.brand-mark{width:37px;height:37px}.online-label{display:none}.hero{display:block;min-height:590px}.hero-copy{padding:45px 0 20px}.hero-art{position:absolute;inset:145px -15px 0 24%;min-height:0;opacity:.8;z-index:-1}.hero-copy{position:relative}.hero-text{max-width:255px}.hero-index{bottom:15px}.mode-section,.roster-section{padding:36px 0}.section-heading{gap:12px}.section-count{font-size:8px;white-space:nowrap}.mode-card{min-height:157px;padding:15px}.mode-title{font-size:21px}.mode-desc{max-width:135px}.player-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.player-card{min-height:118px}.setup-row{align-items:flex-start;flex-direction:column;gap:12px}.difficulty-group{width:100%}.difficulty-group button{flex:1}.game-header{gap:10px;flex-wrap:wrap}.game-header h2{font-size:27px}.back-btn{padding:10px}.score-box{min-width:70px;padding:6px 10px}.game-layout{grid-template-columns:1fr}.pitch-wrap{padding:8px}.controls-panel{padding:18px}.touch-note{padding-top:18px}footer{font-size:8px;gap:10px}footer span:nth-child(2){display:none}}
+@media(orientation:landscape) and (max-height:600px){.topbar{height:58px}.game-screen{padding-top:16px}.game-header{margin-bottom:12px}.game-layout{grid-template-columns:minmax(0,1.5fr) minmax(220px,.7fr)}#pitch{aspect-ratio:1.55}.controls-panel{padding:14px}.control-text{margin-bottom:12px}.touch-note{padding-top:10px}.hero{min-height:350px}}
+
+
+
+/* Goalkeeper picker styling — keeps the existing Eclipse Arena layout intact. */
+.goalkeeper-pick {
+  margin-top: 34px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+}
+.keeper-heading {
+  margin-bottom: 16px;
+}
+.goalie-selection-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.goalie-selection-grid .player-card {
+  min-height: 112px;
+}
+@media (max-width: 900px) {
+  .goalie-selection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .goalkeeper-pick {
+    margin-top: 26px;
+    padding-top: 22px;
+  }
+  .goalie-selection-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* Additional match modes, using the existing card style and theme. */
+.mode-card.head-to-head .mode-icon { color: #bd7bff; }
+.mode-card.vs-attack .mode-icon { color: #c7ff4a; }
+
+/* Full-match controls — preserve existing background and page layout. */
+.match-hud{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:8px;padding:10px 12px;background:#0b1710;border:1px solid var(--line);font-size:10px;letter-spacing:1px}
+.match-scoreline{display:flex;align-items:center;gap:9px}.match-scoreline strong{font-size:22px;font-weight:900;color:var(--lime)}.match-scoreline span,.match-hud>span{font-size:9px;font-weight:800;color:var(--muted)}
+.match-controls{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px;margin-top:8px;background:#0c1711;border:1px solid var(--line)}
+.match-move-pad{display:flex;flex-direction:column;align-items:center;gap:5px}.match-move-pad>div{display:flex;gap:5px}
+.match-move-pad button,.match-action-pad button{min-width:42px;min-height:42px;border:1px solid var(--line);background:#1a3023;color:var(--white);font-weight:900;touch-action:none;user-select:none;-webkit-user-select:none}
+.match-move-pad button:active,.match-action-pad button:active{background:var(--lime);color:#10180c}
+.match-action-pad{display:grid;grid-template-columns:repeat(2,minmax(66px,1fr));gap:6px}.match-action-pad button{padding:8px;font-size:9px;letter-spacing:.6px}.match-action-pad button[data-action="tackle"]{border-color:#ff8c42}.match-action-pad button[data-action="shoot"]{background:var(--lime);color:#10180c}
+.match-result{margin-top:8px;padding:14px;background:#c7ff4a12;border:1px solid var(--lime);color:var(--lime);font-weight:900;font-size:12px;line-height:1.6}
+@media(max-width:600px){.match-controls{padding:8px;gap:8px}.match-move-pad button{min-width:36px;min-height:36px}.match-action-pad{grid-template-columns:repeat(2,minmax(58px,1fr))}.match-action-pad button{font-size:8px;padding:7px 3px}}
+
+/* Compact soundtrack picker in the existing control panel; no page redesign. */
+.music-panel{margin-top:14px;padding:12px;border:1px solid var(--line);background:rgba(8,18,12,.48);display:flex;flex-direction:column;gap:9px}
+.music-panel-heading{display:flex;align-items:center;gap:9px}.music-note{display:grid;place-items:center;width:32px;height:32px;border:1px solid var(--line);color:var(--lime);font-size:19px}.music-panel-heading .eyebrow{margin:0 0 3px}.music-panel-heading strong{font-size:13px;letter-spacing:.2px}
+.music-label{font-size:9px;font-weight:800;letter-spacing:1px;color:var(--muted)}
+.music-select{width:100%;min-height:42px;padding:9px;background:#101c14;color:var(--white);border:1px solid var(--line);border-radius:4px;font:inherit;font-size:11px}
+.music-actions{display:grid;grid-template-columns:1fr 72px;gap:7px}.music-play-btn,.music-stop-btn,.music-official-btn{min-height:38px;padding:8px;border:1px solid var(--line);font-size:9px;font-weight:900;letter-spacing:.5px;touch-action:manipulation}
+.music-play-btn{background:var(--lime);color:#10180c;border-color:var(--lime)}.music-stop-btn{background:#152319;color:var(--white)}.music-official-btn{background:#152319;color:var(--white);width:100%;text-align:center}
+.music-status{margin:0;color:var(--muted);font-size:10px;line-height:1.5}
+.music-embed-wrap{width:100%;min-height:220px;border:1px solid var(--line);background:#050806;border-radius:5px;overflow:hidden}
+.music-embed-wrap iframe{display:block;width:100%;height:220px;border:0;background:#050806}
+
+
+
+/* Creator channel links — compact addition to the existing controls panel. */
+.creator-panel{margin-top:12px;padding:12px;border:1px solid var(--line);background:rgba(8,18,12,.48);display:flex;flex-direction:column;gap:9px}.creator-note{margin:0;color:var(--muted);font-size:10px;line-height:1.5}.creator-links{display:grid;grid-template-columns:1fr 1fr;gap:6px}.creator-links a{display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:36px;padding:8px;border:1px solid var(--line);background:#101c14;color:var(--white);text-decoration:none;font-size:10px;font-weight:800;line-height:1.3}.creator-links a span{color:var(--lime);font-size:13px}.creator-links a:focus,.creator-links a:hover{border-color:var(--lime);background:#1a3023}@media(max-width:600px){.creator-links{grid-template-columns:1fr 1fr}.creator-links a{font-size:9px;padding:7px 6px}}
+
+
+/* In-game creator video hub, retaining the existing panel theme. */
+.video-frame-wrap{width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line);background:#000}.video-frame-wrap iframe{display:block;width:100%;height:100%;border:0}.creator-panel .music-select{margin-bottom:1px}.creator-panel .music-official-btn{display:block}
+
+
+/* YouTube Area: separate destination, matching the existing Eclipse Arena theme. */
+.youtube-screen{padding:28px 0 48px;max-width:100%}
+.youtube-header{margin-bottom:18px}
+.youtube-panel{max-width:980px;margin:0 auto;background:var(--panel);border:1px solid var(--line);padding:clamp(16px,3vw,28px)}
+.youtube-panel-heading{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.youtube-panel-heading h3{font:800 clamp(25px,4vw,36px)/1.05 'Barlow Condensed',sans-serif;margin:0}
+.youtube-panel-heading h3 em{font-style:normal;color:var(--lime)}
+.youtube-help{font-size:12px;line-height:1.7;color:var(--muted);max-width:760px;margin:0 0 22px}
+.youtube-search-form,.youtube-watch-form{display:flex;flex-direction:column;gap:8px;margin-top:18px}
+.youtube-search-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.youtube-search-row .music-select{min-width:0}
+.youtube-search-row button{min-width:105px;padding:10px 14px}
+.youtube-quick-searches{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.youtube-quick-searches button{background:#15231f;color:var(--white);border:1px solid var(--line);padding:9px 12px;font-size:10px;font-weight:800}
+.youtube-quick-searches button:hover,.youtube-quick-searches button:focus-visible{border-color:var(--lime);color:var(--lime)}
+.youtube-open-link{display:inline-flex;margin-top:12px;color:var(--lime);font-size:10px;font-weight:900;letter-spacing:.7px;text-decoration:none}
+.youtube-open-link:hover{text-decoration:underline}
+.youtube-player-wrap{width:100%;aspect-ratio:16/9;margin-top:20px;overflow:hidden;border:1px solid var(--line);background:#000}
+.youtube-player-wrap iframe{display:block;width:100%;height:100%;border:0}
+@media(max-width:600px){.youtube-screen{padding-top:18px}.youtube-header{gap:10px}.youtube-search-row{grid-template-columns:1fr}.youtube-search-row button{width:100%;min-height:42px}.youtube-quick-searches button{flex:1 1 auto}.youtube-panel{padding:15px}}
+
+/* Searchable in-game YouTube channel directory and saved favourites. */
+.youtube-channel-section{margin-top:26px}
+.youtube-section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
+.youtube-section-title h3{font:800 15px/1.2 'Barlow Condensed',sans-serif;margin:0;letter-spacing:.5px}
+.youtube-section-title span{font-size:10px;color:var(--muted)}
+.youtube-channel-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.youtube-channel-card{min-width:0;background:#101b18;border:1px solid var(--line);padding:13px;display:flex;flex-direction:column;gap:8px}
+.youtube-channel-name{font-size:13px;line-height:1.25;color:var(--white)}
+.youtube-channel-category{font-size:10px;line-height:1.4;color:var(--muted);min-height:26px}
+.youtube-channel-actions{display:flex;gap:6px;margin-top:auto}
+.youtube-channel-actions button{min-height:34px;padding:7px 8px;font-size:9px;font-weight:900;letter-spacing:.2px}
+.youtube-channel-play{flex:1;background:var(--lime);color:#07110f;border:1px solid var(--lime)}
+.youtube-channel-fav{background:#15231f;color:var(--white);border:1px solid var(--line)}
+.youtube-channel-fav:hover,.youtube-channel-fav:focus-visible{border-color:var(--lime);color:var(--lime)}
+.youtube-empty{grid-column:1/-1;color:var(--muted);font-size:11px;line-height:1.6}
+@media(max-width:600px){.youtube-channel-grid{grid-template-columns:1fr}.youtube-section-title{align-items:flex-start;flex-direction:column;gap:5px}.youtube-channel-category{min-height:0}}
+
+.youtube-channel-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.youtube-channel-links a{display:inline-flex;align-items:center;justify-content:center;min-height:30px;padding:6px 8px;border:1px solid var(--line);background:#0d1714;color:var(--lime);font-size:8px;font-weight:900;letter-spacing:.35px;text-decoration:none;overflow-wrap:anywhere}
+.youtube-channel-links a:hover,.youtube-channel-links a:focus-visible{border-color:var(--lime);text-decoration:underline}
+
+.arena-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:-8px 0 16px}
+.arena-tools input,.arena-tools select{min-height:36px;min-width:0;border:1px solid var(--line);background:var(--panel);color:var(--white);padding:8px 10px;font-size:10px}
+.arena-tools input{flex:1 1 180px}.arena-tools select{flex:0 1 155px}.arena-stats{flex:1 1 100%;font-size:9px;letter-spacing:.5px;color:var(--muted);line-height:1.5}
+.mode-favourite{position:absolute;right:13px;top:38px;z-index:3;width:30px;height:30px;border:1px solid var(--line);background:#07110fdd;color:var(--lime);font-size:18px;line-height:1;border-radius:50%;display:grid;place-items:center}
+.mode-favourite:hover{border-color:var(--lime)}.mode-card[hidden]{display:none!important}
+@media(max-width:600px){.arena-tools{gap:6px}.arena-tools input{flex-basis:100%}.arena-tools select{flex:1 1 130px}.arena-stats{font-size:8px}.mode-favourite{right:9px;top:34px;width:28px;height:28px}}
+
+/* Career progression, challenges and World Tour; original palette/background remain untouched. */
+.career-hub{margin-top:28px;padding:clamp(15px,2.5vw,24px);border:1px solid var(--line);background:var(--panel);border-radius:2px}
+.career-hub-head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-bottom:15px}.career-hub-head h2{font:700 clamp(25px,4vw,36px)/1 'Barlow Condensed',sans-serif;margin:0}.career-hub-head h2 em{font-style:normal;color:var(--lime)}.career-hub-note{font-size:9px;color:var(--muted);text-align:right}
+.career-metrics{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.career-metrics>div{display:flex;flex-direction:column;gap:4px;padding:12px 10px;background:var(--panel2);border:1px solid var(--line)}.career-metrics strong{font:800 23px/1 'Barlow Condensed',sans-serif;color:var(--lime)}.career-metrics span{font-size:8px;font-weight:800;letter-spacing:.7px;color:var(--muted)}
+.career-hub-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.career-hub-actions button{min-height:40px;padding:10px 13px;font-size:10px}.career-hub-status,.career-hub-hint{font-size:10px;line-height:1.6;color:var(--muted)}
+.career-hub-columns{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px;margin-top:18px}.career-hub-columns h3{font:800 13px 'Barlow Condensed',sans-serif;letter-spacing:.7px;margin:0 0 12px}
+.development-player{padding:12px;margin-bottom:9px;background:var(--panel2);border:1px solid var(--line)}.development-player>strong{display:block;font-size:12px}.development-player>span{display:block;margin-top:4px;font-size:9px;color:var(--muted)}
+.development-bars{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.development-bars label{display:grid;grid-template-columns:1fr auto;gap:4px;font-size:9px;color:var(--muted)}.development-bars b{color:var(--white)}.development-bars i{grid-column:1/-1;height:4px;background:#26352f;display:block;overflow:hidden}.development-bars i span{display:block;height:100%;background:var(--lime)}
+.achievement{display:flex;align-items:center;gap:9px;padding:10px 0;border-bottom:1px solid var(--line);opacity:.6}.achievement>span{font-size:20px;color:var(--muted)}.achievement strong{display:block;font-size:10px}.achievement small{display:block;margin-top:3px;font-size:9px;color:var(--muted)}.achievement.unlocked{opacity:1}.achievement.unlocked>span{color:var(--lime)}
+@media(max-width:650px){.career-metrics{grid-template-columns:repeat(3,minmax(0,1fr))}.career-hub-actions{display:grid;grid-template-columns:1fr}.career-hub-actions button{width:100%}.career-hub-columns{grid-template-columns:1fr;gap:18px}.career-hub-head{align-items:flex-start;flex-direction:column}.career-hub-note{text-align:left}}
+
+
+/* Career extras use existing theme and layout shell; no background changes. */
+.career-extra-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.career-extra-actions button{min-height:38px;padding:9px 12px;font-size:9px;font-weight:800}
+.career-extra-panel{margin-top:12px;padding:15px;background:var(--panel2);border:1px solid var(--line)}
+.career-extra-panel:empty{display:none}
+.career-extra-panel h3{margin:0 0 8px;font:800 17px 'Barlow Condensed',sans-serif;letter-spacing:.7px}
+.career-extra-panel p{color:var(--muted);font-size:10px;line-height:1.6;margin:7px 0 12px}
+.career-extra-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.career-extra-grid button{min-height:44px;padding:10px;background:#0d1714;border:1px solid var(--line);color:var(--white);font-size:10px;font-weight:800;text-align:left}
+.career-extra-grid button:hover,.career-extra-grid button:focus-visible{border-color:var(--lime);color:var(--lime)}
+.trophy-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.trophy-item{display:flex;flex-direction:column;gap:6px;padding:12px;border:1px solid var(--line);background:#0d1714}
+.trophy-item>span{font-size:23px}.trophy-item strong{font-size:10px}.trophy-item small{font-size:9px;line-height:1.5;color:var(--muted)}
+.trophy-item.earned{border-color:rgba(199,255,74,.55)}.trophy-item.locked{opacity:.55;filter:saturate(.35)}
+.season-progress>div{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:var(--muted);margin-bottom:8px}.season-progress b{color:var(--white)}
+.season-progress>i{display:block;height:7px;background:#26352f;overflow:hidden}.season-progress>i span{display:block;height:100%;background:var(--lime)}
+.career-season-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.career-season-stats>div{padding:12px;background:#0d1714;border:1px solid var(--line);display:flex;flex-direction:column;gap:5px}
+.career-season-stats strong{font:800 22px 'Barlow Condensed',sans-serif;color:var(--lime)}.career-season-stats small{font-size:8px;font-weight:800;letter-spacing:.6px;color:var(--muted)}
+.personal-rank{padding:12px;background:#0d1714;border:1px solid var(--line);display:flex;flex-direction:column;gap:5px}
+.personal-rank>span{font-size:8px;font-weight:800;letter-spacing:1px;color:var(--muted)}.personal-rank>strong{font:900 26px 'Barlow Condensed',sans-serif;color:var(--lime)}.personal-rank>small{font-size:9px;line-height:1.5;color:var(--muted)}
+@media(max-width:600px){.career-extra-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.trophy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.career-extra-actions{display:grid;grid-template-columns:1fr 1fr}.career-extra-actions button{width:100%;padding:8px 6px;font-size:8px}}
+
+.player-card-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.player-collect-card{display:flex;flex-direction:column;align-items:flex-start;gap:5px;min-height:128px;padding:12px;border:1px solid var(--line);background:linear-gradient(145deg,#17251f,#0d1714)}.player-collect-card>span{font-size:25px}.player-collect-card>small{font-size:8px;letter-spacing:.8px;color:var(--lime);font-weight:900}.player-collect-card>strong{font-size:11px}.player-collect-card>b{margin-top:auto;font-size:8px;letter-spacing:.7px}.player-collect-card.card-unlocked{border-color:rgba(199,255,74,.55)}.player-collect-card.card-locked{opacity:.5;filter:saturate(.3)}@media(max-width:600px){.player-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* FC-style OVR cards and friends UI: preserves the existing site background and shell. */
+.player-locked{opacity:.52;filter:saturate(.35);cursor:not-allowed!important;border-style:dashed!important}
+.ovr-meter{height:3px;width:100%;margin-top:8px;background:#27352f}.ovr-meter i{display:block;height:100%;width:100%;background:var(--lime)}.ovr-meter span{display:block;height:100%;background:var(--lime)}
+.friends-panel{margin-top:22px;padding:16px;background:var(--panel2);border:1px solid var(--line)}
+.friends-panel h3{font:800 18px 'Barlow Condensed',sans-serif;margin:0 0 8px}.friends-panel>p{font-size:10px;line-height:1.6;color:var(--muted)}
+.friend-id-row,.friend-add-row{display:flex;gap:8px;align-items:center;margin:10px 0}.friend-id-row strong{padding:10px 12px;border:1px solid var(--lime);color:var(--lime);letter-spacing:1px}
+.friend-add-row input,.friends-panel textarea{width:100%;min-width:0;padding:12px;background:#0d1714;color:var(--white);border:1px solid var(--line);border-radius:0;font-size:11px}
+.friends-panel textarea{margin-top:8px;resize:vertical}.friend-add-row button{white-space:nowrap;min-height:42px;padding:10px;font-size:9px}
+.friend-entry{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.friend-entry>div{display:flex;flex-direction:column;gap:4px;min-width:0}.friend-entry strong{font-size:11px}.friend-entry small{font-size:9px;color:var(--muted);overflow-wrap:anywhere}.friend-entry button{background:transparent;color:var(--muted);border:1px solid var(--line);padding:7px;font-size:8px}
+@media(max-width:600px){.friend-add-row{flex-direction:column;align-items:stretch}.friend-add-row button{width:100%}.friend-id-row{flex-wrap:wrap}}
+
+.fc-attributes{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:2px;margin-top:8px;width:100%}.fc-attributes span{display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0}.fc-attributes b{font-size:7px;letter-spacing:.2px;color:var(--muted)}.fc-attributes strong{font:700 10px 'Barlow Condensed',sans-serif;color:var(--white)}.player-locked .fc-attributes{opacity:.75}
+
+.fc-attributes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 7px;margin:10px 0 4px;font-size:9px;color:var(--muted)}.fc-attributes span{white-space:nowrap}.fc-attributes b{color:var(--lime);font-size:8px;letter-spacing:.3px}.player-card{height:auto;min-height:195px}.player-card .player-special{min-height:24px}
+.friends-panel{margin-top:22px;padding:18px;background:var(--panel);border:1px solid var(--line)}.friends-panel h3{font:800 18px 'Barlow Condensed',sans-serif;letter-spacing:.7px;margin:0 0 8px}.friends-panel>p{font-size:10px;line-height:1.6;color:var(--muted)}.friend-id-row,.friend-add-row{display:flex;align-items:center;gap:8px;margin:9px 0}.friend-id-row strong{font:800 18px 'Barlow Condensed',sans-serif;letter-spacing:1px;color:var(--lime);margin-right:auto}.friends-panel input,.friends-panel textarea{width:100%;min-width:0;padding:12px;background:#0a1411;border:1px solid var(--line);color:var(--white);border-radius:0;font-size:11px}.friends-panel textarea{display:block;margin:8px 0;resize:vertical}.friends-panel button{font-size:9px;font-weight:900;letter-spacing:.5px;padding:11px 12px;min-height:40px;white-space:nowrap}.friend-entry{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}.friend-entry strong,.friend-entry small{display:block}.friend-entry strong{font-size:11px}.friend-entry small{font-size:9px;color:var(--muted);margin-top:4px}@media(max-width:600px){.fc-attributes{font-size:8px;gap:4px}.friend-add-row{align-items:stretch}.friend-add-row button{white-space:normal;max-width:120px}.friends-panel{padding:12px}.friend-id-row{flex-wrap:wrap}}
+
+
+/* Futuristic esports typography across the existing page.
+   Typography only: preserves every section, size, position, and layout. */
+.brand,
+.brand-mark,
+h1,h2,h3,
+.hero-stat strong,.hero-index,
+.section-count,.mode-title,.mode-number,.mode-icon,
+.player-rating,.player-role,.player-name,.player-special,
+.eyebrow,.top-actions,.primary-btn,.secondary-btn,.back-btn,
+.difficulty-group button,.game-header h2,.score-box strong,
+.pitch-topline,.aim-tip,.power-label,.shoot-btn,
+.keeper-pad>span,.keeper-pad button,
+.match-hud,.match-scoreline strong,.match-controls button,
+.music-panel-heading strong,.music-label,.music-select,
+.music-play-btn,.music-stop-btn,.music-official-btn,
+.creator-links a,.youtube-panel-heading h3,
+.youtube-search-row button,.youtube-quick-searches button,
+.youtube-open-link,.youtube-section-title h3,
+.youtube-channel-name,.youtube-channel-actions button,
+.arena-tools input,.arena-tools select,.arena-stats,
+.career-hub-head h2,.career-metrics strong,.career-hub-columns h3,
+.development-player>strong,.achievement strong,
+.career-extra-actions button,.career-extra-panel h3,
+.trophy-item strong,.season-progress>div,.career-season-stats strong,
+.personal-rank>strong,.player-collect-card>strong,
+.player-collect-card>b,.friends-panel h3,.friend-id-row strong,
+.friend-add-row button,.friend-entry strong,
+.fc-attributes strong {
+  font-family:'Chakra Petch','Barlow Condensed',sans-serif;
+}
+.brand { letter-spacing:1px; }
+.brand small,.eyebrow,.top-actions,.section-count,.mode-number,
+.player-role,.pitch-topline,.aim-tip,.power-label,.music-label,
+.arena-stats,.career-metrics span,.personal-rank>span {
+  letter-spacing:1px;
+}
+h1 { letter-spacing:-1.5px; }
+h2,h3,.mode-title,.game-header h2,.youtube-panel-heading h3 {
+  letter-spacing:.2px;
+}
+@media(max-width:600px){
+  .brand { letter-spacing:.5px; }
+}
+
+
+
+
+
+/* Removed obsolete Vampire Wars font rules; Eclipse Arena typography is managed in fought-knight.css. */
+
+/* Profile photo picker and editor */
+.profile-editor{display:flex;align-items:center;gap:16px;margin:14px 0;padding:14px;border:1px solid var(--line);background:var(--panel2)}
+.profile-avatar-wrap{position:relative;flex:0 0 104px;width:104px;height:104px;overflow:hidden;border:2px solid var(--lime);border-radius:50%;background:#101b17;display:grid;place-items:center}
+.profile-photo-preview{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform-origin:center;display:block}
+.profile-photo-fallback{font:700 24px 'Chakra Petch',sans-serif;color:var(--lime);letter-spacing:1px}
+.profile-photo-controls{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px}
+.profile-photo-controls>strong{font-size:12px;letter-spacing:1.2px;color:var(--lime)}
+.profile-photo-controls>p{margin:0;color:var(--muted);font-size:11px;line-height:1.45}
+.profile-photo-controls>label{font-size:10px;letter-spacing:1px;color:var(--muted)}
+.profile-photo-controls input[type=range]{width:100%;accent-color:var(--lime)}
+.profile-file-input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
+.profile-photo-buttons{display:flex;gap:7px;flex-wrap:wrap}
+.profile-photo-buttons button,.profile-photo-controls>button{font-size:10px;padding:9px 10px}
+@media(max-width:520px){.profile-editor{align-items:flex-start;gap:12px;padding:10px}.profile-avatar-wrap{flex-basis:82px;width:82px;height:82px}.profile-photo-buttons button,.profile-photo-controls>button{font-size:9px;padding:8px}}
+
+
+
+
+/* FoughtKnight typography and lime accent are managed in fought-knight.css. */
+
+
+/* Lock the game viewport horizontally while preserving normal vertical scrolling. */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  overscroll-behavior-x: none;
+}
+body {
+  touch-action: pan-y pinch-zoom;
+}
+.app-shell,
+main,
+.screen {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+@supports not (overflow: clip) {
+  html, body, .app-shell, main, .screen {
+    overflow-x: hidden;
+  }
+}
+
+
+/* Red-orange accent override across the full game UI */
+:root { --lime: #00E5FF !important; }
+
+
+/* Apex Strikers electric cyan accent theme */
+:root { --lime: #00E5FF !important; }
+
+
+/* Apex Strikers palette: cyan UI, solar-orange action, gold legendary rewards */
+:root{--cyan:#00E5FF;--gold:#D4AF37;--solar-orange:#FF9500;--legendary:#D4AF37;}
+.longshot .mode-icon{color:var(--solar-orange)}
+.match-action-pad button[data-action="shoot"]{background:var(--solar-orange);border-color:var(--solar-orange);color:#171006}
+.player-collect-card{border-color:rgba(212,175,55,.42);background-image:linear-gradient(135deg,rgba(212,175,55,.09),transparent 58%)}
+.player-collect-card small{color:#D4AF37}
+
+
+/* Apex Strikers: expand Solar Orange accents beyond shooting */
+:root{--solar-orange:#FF9500;--solar-orange-soft:rgba(255,149,0,.16);--solar-orange-glow:rgba(255,149,0,.32)}
+button.primary,button.primary-btn,.btn-primary,.primary-button,
+button.start-match,button.challenge-btn,.match-start-btn{
+  border-color:var(--solar-orange);
+}
+button.primary:hover,button.primary-btn:hover,.btn-primary:hover,.primary-button:hover,
+button.start-match:hover,button.challenge-btn:hover,.match-start-btn:hover{
+  box-shadow:0 0 16px var(--solar-orange-glow);
+}
+button:active,.btn:active,.mode-card:active,.mode-button:active{
+  border-color:var(--solar-orange);
+}
+.progress-fill,.xp-bar-fill,.shot-power-fill,.power-meter-fill{
+  background:linear-gradient(90deg,#FFB340,#FF9500);
+}
+.active .nav-icon,.nav-item.active .nav-icon,.tab.active,.tab-button.active{
+  box-shadow:inset 0 -2px 0 var(--solar-orange);
+}
+.longshot .mode-icon,.match-action-pad button[data-action="shoot"]{
+  color:#171006;
+}
+.match-action-pad button[data-action="shoot"]{
+  background:linear-gradient(135deg,#FFB340,#FF9500);
+  border-color:#FF9500;
+  box-shadow:0 0 12px rgba(255,149,0,.2);
+}
+
+
+/* Quick-play controls for Hassan's two requested Montagem tracks. */
+.music-quick-songs{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:2px 0 4px}
+.music-quick-song-btn{min-width:0;min-height:42px;padding:10px 8px;border:1px solid rgba(255,149,0,.72);background:linear-gradient(135deg,rgba(255,149,0,.18),rgba(0,229,255,.08));color:var(--white);font-size:10px;font-weight:900;letter-spacing:.45px;line-height:1.3}
+.music-quick-song-btn:hover,.music-quick-song-btn:focus-visible{border-color:#FF9500;background:rgba(255,149,0,.22);box-shadow:0 0 14px rgba(255,149,0,.2)}
+@media(max-width:420px){.music-quick-songs{grid-template-columns:1fr}.music-quick-song-btn{min-height:38px}}
+
+
+/* APEX STRIKERS — balanced Electric Cyan + Solar Orange across the main screen. */
+:root{
+  --solar-orange:#FF9500;
+  --solar-orange-bright:#FFB340;
+  --solar-orange-soft:rgba(255,149,0,.16);
+  --solar-orange-line:rgba(255,149,0,.55);
+  --electric-cyan:#00E5FF;
+}
+/* Main header and brand: make both signature colours obvious at first glance. */
+.topbar{border-bottom:1px solid rgba(255,149,0,.45);box-shadow:0 1px 0 rgba(0,229,255,.18)}
+.brand b{color:var(--solar-orange)!important}
+.brand-mark{
+  background:linear-gradient(135deg,var(--electric-cyan) 0 49%,var(--solar-orange) 51% 100%)!important;
+  box-shadow:0 0 18px rgba(0,229,255,.22),0 0 24px rgba(255,149,0,.22);
+}
+.top-actions .live-dot{background:var(--solar-orange)!important;box-shadow:0 0 12px rgba(255,149,0,.65)!important}
+/* Main hero: visible orange light, cyan/orange orbit rings, and a mixed-color CTA. */
+.hero{border-bottom:1px solid rgba(255,149,0,.38)}
+.hero:before{
+  background:
+    radial-gradient(ellipse at 20% 50%,rgba(255,149,0,.13),transparent 42%),
+    radial-gradient(ellipse at 76% 52%,rgba(0,229,255,.16),transparent 48%),
+    linear-gradient(110deg,rgba(255,149,0,.045),transparent 48%,rgba(0,229,255,.05))!important;
+}
+.hero h1 em,.hero h2 em{color:var(--solar-orange)!important;text-shadow:0 0 24px rgba(255,149,0,.2)}
+.hero .eyebrow{color:var(--solar-orange)!important}
+.hero-art{
+  background:
+    radial-gradient(ellipse at 28% 30%,rgba(255,149,0,.24),transparent 34%),
+    radial-gradient(ellipse at 70% 43%,rgba(0,229,255,.2),transparent 42%),
+    linear-gradient(180deg,rgba(255,149,0,.04),rgba(0,0,0,.28))!important;
+}
+.hero-art:before{background:repeating-linear-gradient(90deg,transparent 0 54px,rgba(0,229,255,.075) 55px 56px,transparent 57px 110px,rgba(255,149,0,.09) 111px 112px)!important}
+.sun-glow{background:rgba(255,149,0,.25)!important;box-shadow:0 0 55px rgba(255,149,0,.24),0 0 90px rgba(0,229,255,.12)!important}
+.orbit-one{border-color:rgba(255,149,0,.72)!important}
+.orbit-two{border-color:rgba(0,229,255,.55)!important}
+.hero-ball{box-shadow:20px 35px 65px #0009,0 0 32px rgba(0,229,255,.25),0 0 48px rgba(255,149,0,.2)!important}
+.hero-stadium{
+  border-color:rgba(255,149,0,.6)!important;
+  background:repeating-linear-gradient(0deg,rgba(0,229,255,.09) 0 1px,transparent 1px 28px),linear-gradient(180deg,rgba(255,149,0,.18),#0a1710)!important;
+}
+.hero-stat strong,.hero-index{color:var(--solar-orange)!important}
+.primary-btn{
+  background:linear-gradient(110deg,var(--electric-cyan) 0 48%,var(--solar-orange) 52% 100%)!important;
+  color:#07110f!important;border:1px solid rgba(255,255,255,.22)!important;
+  box-shadow:0 0 18px rgba(0,229,255,.12),0 0 22px rgba(255,149,0,.15);
+}
+.primary-btn:hover{box-shadow:0 0 20px rgba(0,229,255,.2),0 0 28px rgba(255,149,0,.28)!important}
+/* Main mode cards alternate cyan and orange accents instead of hiding orange in one mode. */
+.mode-section,.roster-section{border-bottom-color:rgba(255,149,0,.3)!important}
+.mode-section .section-heading .eyebrow,.roster-section .section-heading .eyebrow{color:var(--solar-orange)!important}
+.mode-card{border-color:rgba(0,229,255,.23)!important;background:linear-gradient(145deg,rgba(0,229,255,.055),#0b1512 54%,rgba(255,149,0,.075))!important}
+.mode-card:nth-child(4n+1),.mode-card:nth-child(4n+3){border-color:rgba(255,149,0,.48)!important}
+.mode-card:nth-child(4n+1) .mode-icon,.mode-card:nth-child(4n+1) .mode-arrow,
+.mode-card:nth-child(4n+3) .mode-icon,.mode-card:nth-child(4n+3) .mode-arrow{color:var(--solar-orange)!important}
+.mode-card:nth-child(4n+2) .mode-icon,.mode-card:nth-child(4n+2) .mode-arrow,
+.mode-card:nth-child(4n) .mode-icon,.mode-card:nth-child(4n) .mode-arrow{color:var(--electric-cyan)!important}
+.mode-card:nth-child(4n+1):before,.mode-card:nth-child(4n+3):before{background:rgba(255,149,0,.19)!important}
+.mode-card:hover,.mode-card.active{border-color:var(--solar-orange)!important;box-shadow:0 0 18px rgba(255,149,0,.13),0 0 16px rgba(0,229,255,.08)}
+/* Give the roster, setup controls, and interactive focus states the same balanced palette. */
+.player-card{border-top-color:rgba(255,149,0,.48)!important}
+.setup-row label{color:var(--solar-orange)!important}
+.difficulty-group button.selected{background:linear-gradient(100deg,var(--electric-cyan),var(--solar-orange))!important;border-color:var(--solar-orange)!important;color:#07110f!important}
+button:focus-visible,input:focus-visible{outline-color:var(--solar-orange)!important}
+footer{border-top:1px solid rgba(0,229,255,.16)}
+/* Match controls: cyan stays the cool accent; orange is clearly visible on key actions. */
+.back-btn,.secondary-btn{border-color:rgba(255,149,0,.42)}
+#shootBtn,.shoot-btn{background:linear-gradient(110deg,var(--electric-cyan),var(--solar-orange))!important;color:#07110f!important}
+.match-action-pad button[data-action="shoot"]{background:linear-gradient(110deg,var(--electric-cyan),var(--solar-orange))!important;border-color:var(--solar-orange)!important;color:#07110f!important}
+.match-action-pad button[data-action="tackle"],.keeper-pad button{border-color:rgba(255,149,0,.6)!important}
+.game-feedback{border-left-color:var(--solar-orange)!important;background:linear-gradient(90deg,rgba(255,149,0,.11),rgba(0,229,255,.055))!important}
+#powerSlider{accent-color:var(--solar-orange)!important}
+.music-panel,.career-hub,.friends-panel{border-color:rgba(255,149,0,.38)!important}
+.music-panel-heading .eyebrow,.youtube-section-title h3{color:var(--solar-orange)!important}
+.music-play-btn,.music-official-btn{background:linear-gradient(100deg,var(--electric-cyan),var(--solar-orange))!important;color:#07110f!important;border-color:var(--solar-orange)!important}
+.music-select:focus{border-color:var(--solar-orange)!important;box-shadow:0 0 0 1px rgba(255,149,0,.18)}
+/* Keep gold dedicated to legendary cards; cyan + orange are the general interface pair. */
+.player-collect-card.card-unlocked{border-color:rgba(212,175,55,.72)!important}
+@media(max-width:600px){
+  .hero-art{background:
+    radial-gradient(ellipse at 25% 30%,rgba(255,149,0,.23),transparent 38%),
+    radial-gradient(ellipse at 75% 42%,rgba(0,229,255,.22),transparent 45%),
+    linear-gradient(180deg,rgba(255,149,0,.04),rgba(0,0,0,.3))!important}
+}
+
+/* FINAL PALETTE CORRECTION: separate solid colors, never blend cyan and orange together. */
+:root{--solar-orange:#FF9500;--solar-orange-bright:#FFB340;--electric-cyan:#00E5FF}
+.brand b,.hero h1 em,.hero h2 em,.hero .eyebrow,.hero-stat strong,.hero-index{color:var(--solar-orange)!important}
+.brand-mark{background:var(--solar-orange)!important;box-shadow:0 0 22px rgba(255,149,0,.3)!important}
+.topbar{border-bottom:2px solid rgba(255,149,0,.62)!important;box-shadow:none!important}
+.hero:before{background:radial-gradient(ellipse at 24% 50%,rgba(255,149,0,.2),transparent 48%)!important}
+.hero-art{background:radial-gradient(ellipse at 28% 32%,rgba(255,149,0,.3),transparent 42%),linear-gradient(180deg,rgba(255,149,0,.06),rgba(0,0,0,.3))!important}
+.hero-art:before{background:repeating-linear-gradient(90deg,transparent 0 55px,rgba(255,149,0,.11) 56px 57px)!important}
+.sun-glow{background:rgba(255,149,0,.3)!important;box-shadow:0 0 55px rgba(255,149,0,.3)!important}
+.orbit-one,.orbit-two{border-color:rgba(255,149,0,.7)!important}
+.hero-stadium{border-color:rgba(255,149,0,.75)!important;background:linear-gradient(180deg,rgba(255,149,0,.2),#0a1710)!important}
+.hero-ball{box-shadow:20px 35px 65px #0009,0 0 40px rgba(255,149,0,.24)!important}
+.primary-btn{background:var(--solar-orange)!important;color:#171006!important;border:1px solid var(--solar-orange)!important;box-shadow:0 0 22px rgba(255,149,0,.2)!important}
+.primary-btn:hover{background:var(--solar-orange-bright)!important;box-shadow:0 0 26px rgba(255,149,0,.3)!important}
+.mode-card{background:#0b1512!important}
+.mode-card:nth-child(odd){border-color:rgba(255,149,0,.62)!important}
+.mode-card:nth-child(odd) .mode-icon,.mode-card:nth-child(odd) .mode-arrow{color:var(--solar-orange)!important}
+.mode-card:nth-child(even){border-color:rgba(0,229,255,.42)!important}
+.mode-card:nth-child(even) .mode-icon,.mode-card:nth-child(even) .mode-arrow{color:var(--electric-cyan)!important}
+.mode-card:nth-child(odd):before{background:rgba(255,149,0,.14)!important}
+.mode-card:hover,.mode-card.active{border-color:var(--solar-orange)!important;box-shadow:0 0 18px rgba(255,149,0,.16)!important}
+.mode-section .section-heading .eyebrow,.roster-section .section-heading .eyebrow,.setup-row label{color:var(--solar-orange)!important}
+.difficulty-group button.selected{background:var(--solar-orange)!important;border-color:var(--solar-orange)!important;color:#171006!important}
+#shootBtn,.shoot-btn,.match-action-pad button[data-action="shoot"]{background:var(--solar-orange)!important;border-color:var(--solar-orange)!important;color:#171006!important;box-shadow:0 0 14px rgba(255,149,0,.22)!important}
+.match-action-pad button[data-action="tackle"],.keeper-pad button,.back-btn,.secondary-btn{border-color:rgba(255,149,0,.58)!important}
+.game-feedback{border-left-color:var(--solar-orange)!important;background:rgba(255,149,0,.1)!important}
+.progress-fill,.xp-bar-fill,.shot-power-fill,.power-meter-fill{background:var(--solar-orange)!important}
+#powerSlider{accent-color:var(--solar-orange)!important}
+.music-panel,.career-hub,.friends-panel{border-color:rgba(255,149,0,.48)!important}
+.music-panel-heading .eyebrow,.youtube-section-title h3{color:var(--solar-orange)!important}
+.music-play-btn,.music-official-btn{background:var(--solar-orange)!important;color:#171006!important;border-color:var(--solar-orange)!important}
+.music-quick-song-btn{background:rgba(255,149,0,.15)!important;border-color:var(--solar-orange)!important}
+.music-quick-song-btn:hover,.music-quick-song-btn:focus-visible{background:rgba(255,149,0,.28)!important}
+.music-select:focus,button:focus-visible,input:focus-visible{outline-color:var(--solar-orange)!important;border-color:var(--solar-orange)!important}
+.player-card{border-top-color:rgba(255,149,0,.55)!important}
+footer{border-top:1px solid rgba(255,149,0,.28)!important}
+
+
+/* ELECTRIC CYAN BOOST — added as separate accents, keeping Solar Orange distinct. */
+.section-heading h2 em,.game-header h2 em{color:var(--electric-cyan)!important}
+.eyebrow:not(.hero .eyebrow){text-shadow:none}
+.mode-card:nth-child(even):hover,.mode-card:nth-child(even).active{border-color:var(--electric-cyan)!important;box-shadow:0 0 18px rgba(0,229,255,.16)!important}
+.secondary-btn,.back-btn{color:var(--electric-cyan)!important;border-color:rgba(0,229,255,.58)!important}
+.music-stop-btn{border-color:rgba(0,229,255,.58)!important;color:var(--electric-cyan)!important}
+.touch-dot{background:var(--electric-cyan)!important;box-shadow:0 0 10px rgba(0,229,255,.45)!important}
+.aim-tip,.pitch-topline span:last-child{color:var(--electric-cyan)!important}
+
+
+/* EXTRA ELECTRIC CYAN — more cyan details, kept separate from Solar Orange. */
+:root{--electric-cyan:#00E5FF}
+.brand b{color:var(--electric-cyan)!important}
+.topbar{box-shadow:inset 0 -1px 0 rgba(0,229,255,.28)!important}
+.hero-index span,.hero .hero-text{color:rgba(0,229,255,.85)!important}
+.hero-art .orbit-one{border-color:rgba(0,229,255,.7)!important}
+.hero-art .orbit-two{border-color:rgba(0,229,255,.42)!important}
+.section-heading h2 em,.game-header h2 em{color:var(--electric-cyan)!important}
+.mode-card:nth-child(even){border-color:rgba(0,229,255,.65)!important}
+.mode-card:nth-child(even) .mode-icon,.mode-card:nth-child(even) .mode-arrow{color:var(--electric-cyan)!important}
+.mode-card:nth-child(even):hover,.mode-card:nth-child(even).active{box-shadow:0 0 22px rgba(0,229,255,.22)!important}
+.secondary-btn,.back-btn,.music-stop-btn{border-color:rgba(0,229,255,.65)!important;color:var(--electric-cyan)!important}
+.music-select:focus{border-color:var(--electric-cyan)!important;box-shadow:0 0 0 2px rgba(0,229,255,.16)!important}
+.touch-dot{background:var(--electric-cyan)!important;box-shadow:0 0 12px rgba(0,229,255,.6)!important}
+.aim-tip,.pitch-topline span:last-child{color:var(--electric-cyan)!important}
+
+
+/* RESTORE ORIGINAL LIME-GREEN APEX ARENA PALETTE */
+:root{--solar-orange:#c7ff4a;--solar-orange-bright:#dcff80;--electric-cyan:#c7ff4a}
+.brand b,.hero h1 em,.hero h2 em,.hero .eyebrow,.hero-stat strong,.hero-index,
+.section-heading h2 em,.game-header h2 em{color:#c7ff4a!important}
+.brand-mark{background:#c7ff4a!important;box-shadow:0 0 22px rgba(199,255,74,.3)!important}
+.topbar{border-bottom:2px solid rgba(199,255,74,.5)!important;box-shadow:none!important}
+.hero:before{background:radial-gradient(ellipse at 24% 50%,rgba(199,255,74,.18),transparent 48%)!important}
+.hero-art{background:radial-gradient(ellipse at 28% 32%,rgba(199,255,74,.25),transparent 42%),linear-gradient(180deg,rgba(199,255,74,.05),rgba(0,0,0,.3))!important}
+.hero-art .orbit-one,.hero-art .orbit-two{border-color:rgba(199,255,74,.65)!important}
+.sun-glow{background:rgba(199,255,74,.25)!important;box-shadow:0 0 55px rgba(199,255,74,.25)!important}
+.primary-btn,#shootBtn,.shoot-btn,.match-action-pad button[data-action="shoot"]{background:#c7ff4a!important;color:#101608!important;border-color:#c7ff4a!important;box-shadow:0 0 18px rgba(199,255,74,.18)!important}
+.primary-btn:hover{background:#dcff80!important}
+.mode-card:nth-child(odd),.mode-card:nth-child(even){border-color:rgba(199,255,74,.4)!important}
+.mode-card:nth-child(odd) .mode-icon,.mode-card:nth-child(odd) .mode-arrow,
+.mode-card:nth-child(even) .mode-icon,.mode-card:nth-child(even) .mode-arrow{color:#c7ff4a!important}
+.mode-card:hover,.mode-card.active,.mode-card:nth-child(even):hover,.mode-card:nth-child(even).active{border-color:#c7ff4a!important;box-shadow:0 0 18px rgba(199,255,74,.14)!important}
+.mode-card:nth-child(odd):before{background:rgba(199,255,74,.1)!important}
+.mode-section .section-heading .eyebrow,.roster-section .section-heading .eyebrow,.setup-row label{color:#c7ff4a!important}
+.difficulty-group button.selected{background:#c7ff4a!important;border-color:#c7ff4a!important;color:#101608!important}
+.match-action-pad button[data-action="tackle"],.keeper-pad button,.back-btn,.secondary-btn,.music-stop-btn{border-color:rgba(199,255,74,.55)!important;color:#c7ff4a!important}
+.game-feedback{border-left-color:#c7ff4a!important;background:rgba(199,255,74,.08)!important}
+.progress-fill,.xp-bar-fill,.shot-power-fill,.power-meter-fill,#powerSlider{accent-color:#c7ff4a!important}
+.progress-fill,.xp-bar-fill,.shot-power-fill,.power-meter-fill{background:#c7ff4a!important}
+.music-panel,.career-hub,.friends-panel{border-color:rgba(199,255,74,.4)!important}
+.music-panel-heading .eyebrow,.youtube-section-title h3{color:#c7ff4a!important}
+.music-play-btn,.music-official-btn{background:#c7ff4a!important;color:#101608!important;border-color:#c7ff4a!important}
+.music-quick-song-btn{background:rgba(199,255,74,.12)!important;border-color:#c7ff4a!important}
+.music-quick-song-btn:hover,.music-quick-song-btn:focus-visible{background:rgba(199,255,74,.22)!important}
+.music-select:focus,button:focus-visible,input:focus-visible{outline-color:#c7ff4a!important;border-color:#c7ff4a!important}
+.player-card{border-top-color:rgba(199,255,74,.5)!important}
+footer{border-top:1px solid rgba(199,255,74,.25)!important}
+.hero-index span,.hero .hero-text,.aim-tip,.pitch-topline span:last-child{color:rgba(199,255,74,.85)!important}
+.touch-dot{background:#c7ff4a!important;box-shadow:0 0 10px rgba(199,255,74,.45)!important}
+
+
+/* FINAL OVERRIDE: remove remaining orange accents and use lime green consistently. */
+:root{--solar-orange:#c7ff4a;--solar-orange-bright:#dcff80;--electric-cyan:#c7ff4a}
+*,*::before,*::after{--solar-orange:#c7ff4a;--solar-orange-bright:#dcff80;--electric-cyan:#c7ff4a}
+.brand-mark,.primary-btn,.primary-btn:hover,#shootBtn,.shoot-btn,
+.match-action-pad button[data-action="shoot"],.difficulty-group button.selected,
+.progress-fill,.xp-bar-fill,.shot-power-fill,.power-meter-fill,
+.music-play-btn,.music-official-btn,.music-quick-song-btn:hover,
+.sun-glow{background:#c7ff4a!important;border-color:#c7ff4a!important;color:#101608!important}
+.brand b,.hero h1 em,.hero h2 em,.hero .eyebrow,.hero-stat strong,.hero-index,
+.section-heading h2 em,.game-header h2 em,.mode-section .section-heading .eyebrow,
+.roster-section .section-heading .eyebrow,.setup-row label,.music-panel-heading .eyebrow,
+.youtube-section-title h3,.mode-card .mode-icon,.mode-card .mode-arrow,
+.aim-tip,.pitch-topline span:last-child,.secondary-btn,.back-btn,.music-stop-btn{
+  color:#c7ff4a!important
+}
+.topbar,footer,.music-panel,.career-hub,.friends-panel,.player-card,
+.mode-card,.mode-card:nth-child(odd),.mode-card:nth-child(even),
+.match-action-pad button[data-action="tackle"],.keeper-pad button,
+.secondary-btn,.back-btn,.music-stop-btn,.music-quick-song-btn{
+  border-color:rgba(199,255,74,.5)!important
+}
+.hero:before,.hero-art,.hero-art:before,.hero-art .orbit-one,.hero-art .orbit-two,
+.mode-card:nth-child(odd):before,.game-feedback{
+  border-color:rgba(199,255,74,.5)!important
+}
+.hero:before{background:radial-gradient(ellipse at 24% 50%,rgba(199,255,74,.18),transparent 48%)!important}
+.hero-art{background:radial-gradient(ellipse at 28% 32%,rgba(199,255,74,.25),transparent 42%),linear-gradient(180deg,rgba(199,255,74,.05),rgba(0,0,0,.3))!important}
+.hero-art:before{background:repeating-linear-gradient(90deg,transparent 0 55px,rgba(199,255,74,.1) 56px 57px)!important}
+.sun-glow{box-shadow:0 0 55px rgba(199,255,74,.25)!important}
+.mode-card:hover,.mode-card.active{border-color:#c7ff4a!important;box-shadow:0 0 18px rgba(199,255,74,.14)!important}
+.game-feedback{border-left-color:#c7ff4a!important;background:rgba(199,255,74,.08)!important}
+.music-select:focus,button:focus-visible,input:focus-visible{outline-color:#c7ff4a!important;border-color:#c7ff4a!important;box-shadow:0 0 0 1px rgba(199,255,74,.15)!important}
+.touch-dot{background:#c7ff4a!important;box-shadow:0 0 10px rgba(199,255,74,.45)!important}
+
+
+/* FINAL LIME FIX: soundtrack icon and Arena Live indicator. */
+.music-note{color:#c7ff4a!important;border-color:#c7ff4a!important;background:rgba(199,255,74,.08)!important}
+.music-panel-heading .music-note svg,.music-panel-heading .music-note i{color:#c7ff4a!important;stroke:#c7ff4a!important;fill:#c7ff4a!important}
+.top-actions .live-dot,.live-dot,.arena-live-dot,.live-indicator,.status-live-dot{background:#c7ff4a!important;border-color:#c7ff4a!important;box-shadow:0 0 10px rgba(199,255,74,.55)!important}
+.top-actions .live-label,.top-actions .live-status,.arena-live,.live-indicator-label{color:#c7ff4a!important}
+.music-panel-heading strong,.music-panel-heading .eyebrow,.music-label,.music-play-btn,.music-stop-btn,.music-official-btn,.music-quick-song-btn{accent-color:#c7ff4a}
+
+
+/* STRICT TWO-COLOR PALETTE: black + lime green only. */
+:root{
+  --lime:#c7ff4a;
+  --solar-orange:#c7ff4a;
+  --solar-orange-bright:#dcff80;
+  --electric-cyan:#c7ff4a;
+  --cyan:#c7ff4a;
+  --line:rgba(199,255,74,.38);
+  --lime-glow:rgba(199,255,74,.25);
+}
+html,body{background:#050705!important}
+.music-panel,.music-embed-wrap,.music-embed-wrap iframe{border-color:rgba(199,255,74,.4)!important}
+.music-note{color:#c7ff4a!important;border-color:#c7ff4a!important;background:#080b06!important}
+.music-panel-heading strong,.music-panel-heading .eyebrow,.music-label{color:#c7ff4a!important}
+.music-play-btn,.music-official-btn,.music-quick-song-btn{background:#080b06!important;color:#c7ff4a!important;border-color:#c7ff4a!important}
+.music-stop-btn{background:#080b06!important;color:#c7ff4a!important;border-color:#c7ff4a!important}
+.music-quick-song-btn:hover,.music-quick-song-btn:focus-visible{background:rgba(199,255,74,.12)!important;box-shadow:0 0 12px rgba(199,255,74,.18)!important}
+.top-actions .live-dot,.live-dot,.arena-live-dot,.live-indicator,.status-live-dot{background:#c7ff4a!important;border-color:#c7ff4a!important;box-shadow:0 0 10px rgba(199,255,74,.55)!important}
+.top-actions .live-label,.top-actions .live-status,.arena-live,.live-indicator-label{color:#c7ff4a!important}
+.music-panel-heading svg,.music-panel-heading i,.music-note svg,.music-note i{color:#c7ff4a!important;stroke:#c7ff4a!important;fill:#c7ff4a!important}
+
+
+/* FINAL HOMOGENEOUS PALETTE: lime green + black only, including intro, hero floor, and players. */
+:root{--lime:#c7ff4a;--arena-cyan:#c7ff4a;--arena-orange:#c7ff4a;--arena-orange-bright:#dcff80;--arena-orange-glow:rgba(199,255,74,.25);--orange:#c7ff4a;--electric-cyan:#c7ff4a;--cyan:#c7ff4a;--gold:#c7ff4a;--legendary:#c7ff4a}
+.intro-splash{background:#050705!important;color:#f4f8ef!important}
+.intro-splash:before{background:radial-gradient(ellipse at 50% 48%,rgba(199,255,74,.16),transparent 38%),linear-gradient(135deg,transparent 48%,rgba(199,255,74,.035) 49%,transparent 50%)!important}
+.intro-orbit,.intro-orbit-a,.intro-orbit-b{border-color:rgba(199,255,74,.55)!important;box-shadow:0 0 14px rgba(199,255,74,.08)!important}
+.intro-emblem{background:#c7ff4a!important;color:#050705!important;box-shadow:0 0 45px #c7ff4a55,0 0 90px #c7ff4a22!important}
+.intro-wordmark,.intro-wordmark b{color:#f4f8ef!important;text-shadow:0 0 18px #c7ff4a22!important}
+.intro-wordmark b{color:#c7ff4a!important}
+.intro-progress{background:#20251b!important}
+.intro-progress span{background:#c7ff4a!important}
+.hero:before{background:radial-gradient(ellipse at 24% 50%,rgba(199,255,74,.16),transparent 48%)!important}
+.hero-art{background:radial-gradient(ellipse at 28% 32%,rgba(199,255,74,.19),transparent 42%),linear-gradient(180deg,rgba(199,255,74,.025),rgba(0,0,0,.45))!important}
+.hero-art:before{background:repeating-linear-gradient(90deg,transparent 0 55px,rgba(199,255,74,.09) 56px 57px)!important}
+.hero-art .orbit,.hero-art .orbit-one,.hero-art .orbit-two{border-color:rgba(199,255,74,.55)!important}
+.hero-ball{box-shadow:20px 35px 65px #0009,0 0 40px rgba(199,255,74,.18)!important}
+.hero-stadium{border-color:rgba(199,255,74,.65)!important;background:repeating-linear-gradient(0deg,rgba(199,255,74,.055) 0 1px,transparent 1px 28px),linear-gradient(180deg,#172510,#050705)!important}
+.mode-card,.mode-card:nth-child(n),.player-card,.player-collect-card{border-color:rgba(199,255,74,.42)!important;background:linear-gradient(145deg,#11170d,#070907 72%)!important;background-image:linear-gradient(145deg,#11170d,#070907 72%)!important}
+.mode-card:before,.player-card:after{background:rgba(199,255,74,.09)!important}
+.mode-card .mode-icon,.mode-card .mode-arrow,.mode-card:nth-child(n) .mode-icon,.mode-card:nth-child(n) .mode-arrow{color:#c7ff4a!important}
+.mode-card:hover,.mode-card.active,.player-card.selected,.player-collect-card.card-unlocked{border-color:#c7ff4a!important;box-shadow:0 0 16px rgba(199,255,74,.12)!important}
+.player-card:before,.player-rating,.player-collect-card small,.player-collect-card>small,.player-collect-card.card-unlocked small{color:#c7ff4a!important}
+.player-collect-card,.player-collect-card.card-unlocked{background-image:linear-gradient(145deg,rgba(199,255,74,.07),#080a07 65%)!important}
+.freekick,.longshot,.goalie{--card-glow:rgba(199,255,74,.1)!important}
+.freekick .mode-icon,.longshot .mode-icon,.goalie .mode-icon{color:#c7ff4a!important}
+.hero h1 em,.hero h2 em,.hero .eyebrow,.hero-stat strong,.hero-index,.mode-section .section-heading .eyebrow,.roster-section .section-heading .eyebrow,.setup-row label{color:#c7ff4a!important}
+
+
+/* LAST-MILE COLOR OVERRIDE — player stats and all field/hero lines lime, no blue/orange. */
+:root{--lime:#c7ff4a;--orange:#c7ff4a;--electric-cyan:#c7ff4a;--cyan:#c7ff4a;--blue:#c7ff4a;--neon-blue:#c7ff4a}
+body,body *{--lime:#c7ff4a;--orange:#c7ff4a;--electric-cyan:#c7ff4a;--cyan:#c7ff4a;--blue:#c7ff4a;--neon-blue:#c7ff4a}
+.freekick,.longshot,.goalie{--card-glow:rgba(199,255,74,.1)!important}
+.freekick .mode-icon,.longshot .mode-icon,.goalie .mode-icon{color:#c7ff4a!important}
+.hero-stadium,.hero-stadium::before,.hero-stadium::after{background-color:#050705!important;border-color:#c7ff4a!important}
+.hero-stadium{background-image:repeating-linear-gradient(0deg,rgba(199,255,74,.055) 0 1px,transparent 1px 28px),linear-gradient(180deg,#11170d,#050705)!important}
+#pitch{border-color:#c7ff4a!important}
+.player-stats,.player-stats *,.player-stat,.player-stat *,.stat-bar,.stat-bar *,.player-attribute,.player-attribute *,.stat-value,.stat-label,.player-card .stats,.player-card .stats *,.player-card .stat,.player-card .stat *,.player-collect-card .stats,.player-collect-card .stats *,.player-collect-card .stat,.player-collect-card .stat *{color:#c7ff4a!important;border-color:rgba(199,255,74,.55)!important;accent-color:#c7ff4a!important}
+.player-stats .bar,.player-stat .bar,.stat-bar-fill,.player-stat-fill,.stat-fill,.attribute-fill,.player-card .fill,.player-collect-card .fill{background:#c7ff4a!important;background-image:none!important}
+.player-card,.player-collect-card{border-color:rgba(199,255,74,.48)!important}
+svg line,svg polyline,.chart-line,.stat-line,.player-chart-line{stroke:#c7ff4a!important}
+
+
+/* HARD OVERRIDE v3 — lime green (#C7FF4A) + black only for lines, stats, and player accents. */
+:root{--lime:#c7ff4a!important;--orange:#c7ff4a!important;--solar-orange:#c7ff4a!important;--electric-cyan:#c7ff4a!important;--cyan:#c7ff4a!important;--blue:#c7ff4a!important;--arena-cyan:#c7ff4a!important;--arena-orange:#c7ff4a!important;--arena-gold:#c7ff4a!important;--line:rgba(199,255,74,.4)!important;--card-glow:rgba(199,255,74,.12)!important;--player-glow:rgba(199,255,74,.12)!important}
+body,body *{--orange:#c7ff4a;--solar-orange:#c7ff4a;--electric-cyan:#c7ff4a;--cyan:#c7ff4a;--blue:#c7ff4a;--neon-blue:#c7ff4a;--arena-cyan:#c7ff4a;--arena-orange:#c7ff4a}
+.mode-card,.mode-card:nth-child(n){--card-glow:rgba(199,255,74,.12)!important;border-color:rgba(199,255,74,.45)!important}
+.freekick,.longshot,.goalie,.penalty{--card-glow:rgba(199,255,74,.12)!important}
+.player-card,.player-collect-card,.goalie-selection-grid .player-card{--player-glow:rgba(199,255,74,.12)!important;border-color:rgba(199,255,74,.5)!important}
+.player-card:after,.player-card:before,.player-collect-card:before,.player-collect-card:after{background:rgba(199,255,74,.1)!important;box-shadow:none!important}
+.player-rating,.player-role,.player-special,.player-card .fc-attributes,.player-card .fc-attributes b,.player-card .fc-attributes strong,.fc-attributes,.fc-attributes b,.fc-attributes strong,.player-stats,.player-stats *,.player-stat,.player-stat *,.stat-bar,.stat-bar *,.player-attribute,.player-attribute *,.stat-value,.stat-label,.player-card .stats,.player-card .stats *,.player-card .stat,.player-card .stat *,.player-collect-card .stats,.player-collect-card .stats *,.player-collect-card .stat,.player-collect-card .stat *{color:#c7ff4a!important;border-color:rgba(199,255,74,.55)!important;accent-color:#c7ff4a!important}
+.player-card [style*="blue"],.player-card [style*="cyan"],.player-card [style*="orange"],.player-card [style*="255, 140"],.player-card [style*="75,191"]{color:#c7ff4a!important;border-color:#c7ff4a!important}
+.player-stats .bar,.player-stat .bar,.stat-bar-fill,.player-stat-fill,.stat-fill,.attribute-fill,.player-card .fill,.player-collect-card .fill,.fc-attributes i,.fc-attributes em,.fc-attributes span:before,.fc-attributes span:after{background:#c7ff4a!important;background-image:none!important;border-color:#c7ff4a!important}
+svg line,svg polyline,.chart-line,.stat-line,.player-chart-line,.player-stats svg path,.player-stats svg circle{stroke:#c7ff4a!important;fill:none}
+#pitch{border-color:#c7ff4a!important}
+.hero-stadium,.hero-stadium:before,.hero-stadium:after,.hero-art:before,.hero-art:after,.orbit,.orbit-one,.orbit-two{border-color:rgba(199,255,74,.6)!important}
+.hero-stadium{background:repeating-linear-gradient(0deg,rgba(199,255,74,.065) 0 1px,transparent 1px 28px),linear-gradient(180deg,#11170d,#050705)!important}
+.hero-art:before{background:repeating-linear-gradient(90deg,transparent 0 55px,rgba(199,255,74,.12) 56px 57px)!important}
+.topbar,.hero,.mode-section,.roster-section,footer{border-color:rgba(199,255,74,.38)!important}
+.primary-btn,.difficulty-group button.selected,.progress-fill,.xp-bar-fill,.shot-power-fill,.power-meter-fill,.season-progress>i span{background:#c7ff4a!important;border-color:#c7ff4a!important}
+
+
+/* YOUTUBE OWNER PANEL — enforce black + lime green, including access requests and action buttons. */
+.youtube-owner-requests,
+.youtube-owner-requests *,
+.youtube-access-request,
+.youtube-access-request *,
+.youtube-access-gate,
+.youtube-panel,
+.youtube-panel *,
+.youtube-section-title,
+.youtube-section-title *{
+  --lime:#c7ff4a!important;
+  --solar-orange:#c7ff4a!important;
+  --electric-cyan:#c7ff4a!important;
+  --cyan:#c7ff4a!important;
+  --blue:#c7ff4a!important;
+}
+.youtube-owner-requests,.youtube-access-request,.youtube-access-gate,.youtube-panel{
+  background:#080b06!important;
+  color:#eef5e5!important;
+  border-color:rgba(199,255,74,.5)!important;
+  box-shadow:none!important;
+}
+.youtube-owner-requests h3,.youtube-owner-requests h4,
+.youtube-owner-requests .eyebrow,.youtube-owner-requests strong,
+.youtube-owner-requests label,.youtube-owner-requests summary,
+.youtube-access-request h3,.youtube-access-request .eyebrow,
+.youtube-panel-heading h3 em,.youtube-section-title h3,
+.youtube-section-title span{color:#c7ff4a!important}
+.youtube-owner-requests button,.youtube-access-request button,
+.youtube-panel button,.youtube-search-row button,
+.youtube-quick-searches button,.youtube-channel-actions button,
+.youtube-channel-play,.youtube-channel-fav,.youtube-section-title button{
+  background:#080b06!important;
+  color:#c7ff4a!important;
+  border:1px solid rgba(199,255,74,.65)!important;
+  box-shadow:none!important;
+}
+.youtube-owner-requests button:hover,.youtube-access-request button:hover,
+.youtube-panel button:hover,.youtube-channel-actions button:hover{
+  background:rgba(199,255,74,.12)!important;
+  border-color:#c7ff4a!important;
+}
+.youtube-owner-requests input,.youtube-owner-requests textarea,
+.youtube-access-request textarea,.youtube-panel input,.youtube-panel select{
+  background:#050705!important;color:#eef5e5!important;
+  border-color:rgba(199,255,74,.5)!important;accent-color:#c7ff4a!important;
+}
+.youtube-owner-requests input:focus,.youtube-owner-requests textarea:focus,
+.youtube-access-request textarea:focus,.youtube-panel input:focus{
+  outline-color:#c7ff4a!important;border-color:#c7ff4a!important;
+  box-shadow:0 0 0 1px rgba(199,255,74,.2)!important;
+}
+.youtube-owner-requests a,.youtube-panel a{color:#c7ff4a!important}
+.youtube-owner-requests [style*="blue"],.youtube-owner-requests [style*="cyan"],
+.youtube-owner-requests [style*="orange"],.youtube-panel [style*="blue"],
+.youtube-panel [style*="cyan"],.youtube-panel [style*="orange"]{
+  color:#c7ff4a!important;border-color:#c7ff4a!important;
+}
